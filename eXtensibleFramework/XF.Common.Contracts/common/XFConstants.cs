@@ -83,6 +83,8 @@ namespace XF.Common
             public const string DefaultLogSource = "eXtensoft.Log";
             public const string DefaultServiceToken = "80FF8B69-54DB-46B0-976D-96CB16C35B9F";
             //public const string STRATEGYSECTIONNAME = "";
+            public const string DEFAULTLOGGINGSTRATEGY = "";
+            public const string DEFAULTPUBLISHSEVERITY = "";
         }
 
         public static class Context

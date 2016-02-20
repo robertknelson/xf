@@ -2,7 +2,7 @@
 // Copyright © 2016 All Right Reserved
 // </copyright>
 
-namespace XF.Common.contracts
+namespace XF.Common
 {
     using System;
 
