@@ -31,7 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +46,92 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="caching\WebCache.cs" />
+    <Compile Include="common\AppSettingsStrategyResolver.cs" />
+    <Compile Include="common\DbMap.cs" />
+    <Compile Include="common\ExtensionMethods.cs" />
+    <Compile Include="common\ListReader.cs" />
+    <Compile Include="common\ListReaderWriterOptions.cs" />
+    <Compile Include="common\ListReaderWriter`1.cs" />
+    <Compile Include="common\SqlConnectionProvider.cs" />
+    <Compile Include="common\SqlHelper.cs" />
+    <Compile Include="configuration\ConfigStrategyResolver.cs" />
+    <Compile Include="configuration\DatabaseKeyResolver.cs" />
+    <Compile Include="DiscoveryResources.Designer.cs" />
+    <Compile Include="ErrorMessages.Designer.cs" />
+    <Compile Include="idb.dataaccess.config\Case.cs" />
+    <Compile Include="idb.dataaccess.config\DataMap.cs" />
+    <Compile Include="idb.dataaccess.config\DbCommand.cs" />
+    <Compile Include="idb.dataaccess.config\DbConfig.cs" />
+    <Compile Include="idb.dataaccess.config\DbConfigCollection.cs" />
+    <Compile Include="idb.dataaccess.config\Model.cs" />
+    <Compile Include="idb.dataaccess.config\ModelAction.cs" />
+    <Compile Include="idb.dataaccess.config\Parameter.cs" />
+    <Compile Include="idb.dataaccess.config\Switch.cs" />
+    <Compile Include="mdg\ConfigModelDataGateway`1.cs" />
+    <Compile Include="mdg\GenericModelDataGateway`1.cs" />
+    <Compile Include="portal\configuration\Case.cs" />
+    <Compile Include="portal\configuration\DataMap.cs" />
+    <Compile Include="portal\configuration\Model.cs" />
+    <Compile Include="portal\configuration\ModelAction.cs" />
+    <Compile Include="portal\configuration\SqlServerConfigManager.cs" />
+    <Compile Include="portal\configuration\SqlServerContext.cs" />
+    <Compile Include="portal\configuration\SqlStoredProcedure.cs" />
+    <Compile Include="portal\configuration\StrategyOption.cs" />
+    <Compile Include="portal\configuration\Switch.cs" />
+    <Compile Include="portal\contracts\IBorrower`1.cs" />
+    <Compile Include="portal\contracts\IListBorrower`1.cs" />
+    <Compile Include="portal\contracts\ISqlCommandContext`1.cs" />
+    <Compile Include="portal\contracts\ISqlServerModelDataGateway`1.cs" />
+    <Compile Include="portal\contracts\ISqlStoredProcedureFormatter.cs" />
+    <Compile Include="portal\DataMap.cs" />
+    <Compile Include="portal\DataMapProvider.cs" />
+    <Compile Include="portal\DefaultSqlStoredProcedureFormatter.cs" />
+    <Compile Include="portal\discovery\Parameter.cs" />
+    <Compile Include="portal\InlineSqlCommandGenerator.cs" />
+    <Compile Include="portal\SprocMapCache.cs" />
+    <Compile Include="portal\sql.server\Borrower`1.cs" />
+    <Compile Include="portal\sql.server\Builder`1.cs" />
+    <Compile Include="portal\sql.server\Parser`1.cs" />
+    <Compile Include="portal\SqlColumn.cs" />
+    <Compile Include="portal\SQLCommand.cs" />
+    <Compile Include="portal\SqlParameter.cs" />
+    <Compile Include="portal\SqlResolver.cs" />
+    <Compile Include="portal\SqlTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="services\DataPacketService.cs" />
+    <Compile Include="services\DataRequestService.cs" />
+    <Compile Include="services\GenericService.cs" />
+    <Compile Include="services\ModelDataGatewayDataService.cs" />
+    <Compile Include="services\RpcDataPacketService.cs" />
+    <Compile Include="services\RpcDataRequestService.cs" />
+    <Compile Include="services\RpcHandlerDataService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\XF.Common.Contracts\XF.Common.Contracts.csproj">
+      <Project>{2f5cb864-edc3-41c2-a477-a6dbbdb62487}</Project>
+      <Name>XF.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XF.Common.Server.Contracts\XF.Common.Server.Contracts.csproj">
+      <Project>{06c20f02-9cec-4c0e-b92d-13b4cfffc8eb}</Project>
+      <Name>XF.Common.Server.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XF.Common\XF.Common.csproj">
+      <Project>{18dff16a-8f34-4393-a15b-6abdbedb97f4}</Project>
+      <Name>XF.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\DataMaps.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\Discovery.StoredProcedures.sql" />
+    <Content Include="data\Discovery.Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DiscoveryResources.resx" />
+    <EmbeddedResource Include="ErrorMessages.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

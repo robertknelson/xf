@@ -10,7 +10,7 @@ namespace XF.Common
 
     [Serializable]
     [DataContract(Namespace = "http://eXtensoft/XF/schemas/2014/04")]
-    public class Projection 
+    public class Projection : IProjection
     {
         #region properties
 
@@ -45,7 +45,7 @@ namespace XF.Common
         public string MasterId { get; set; }
 
         [DataMember]
-        public List<TypedItem> Items { get; set; }
+        public IEnumerable<TypedItem> Items { get; set; }
 
         #endregion properties
 

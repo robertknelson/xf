@@ -72,6 +72,7 @@
     <Compile Include="common\event.writer\PluginLoader.cs" />
     <Compile Include="common\event.writer\XFToolWriter.cs" />
     <Compile Include="common\ExtensionMethods.cs" />
+    <Compile Include="common\NetMemoryCache.cs" />
     <Compile Include="common\WindowsIdentityProvider.cs" />
     <Compile Include="common\XFConstants.cs" />
     <Compile Include="configuration\eXtensibleConfig.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="configuration\StrategyTypeOption.cs" />
     <Compile Include="configuration\XmlConstants.cs" />
     <Compile Include="contracts\ICache.cs" />
+    <Compile Include="contracts\ICacheable`1.cs" />
     <Compile Include="contracts\IConfigStrategyResolver.cs" />
     <Compile Include="contracts\IContext.cs" />
     <Compile Include="contracts\ICriterion.cs" />
@@ -103,7 +105,9 @@
     <Compile Include="contracts\IResponse`2.cs" />
     <Compile Include="contracts\IRpcDataRequestService.cs" />
     <Compile Include="contracts\IRpcDatastoreService.cs" />
+    <Compile Include="contracts\IRpcHandler`1.cs" />
     <Compile Include="contracts\IRpcRequestService.cs" />
+    <Compile Include="contracts\IStrategyResolver.cs" />
     <Compile Include="contracts\ITypeMap.cs" />
     <Compile Include="contracts\ITypeMapCache.cs" />
     <Compile Include="contracts\IUserIdentityProvider.cs" />
@@ -117,6 +121,7 @@
     <Compile Include="enumerations\ZoneOption.cs" />
     <Compile Include="models\ApplicationContext.cs" />
     <Compile Include="models\Criterion.cs" />
+    <Compile Include="models\ExceptionMessage.cs" />
     <Compile Include="models\ListItem.cs" />
     <Compile Include="models\Message`1.cs" />
     <Compile Include="models\Message`2.cs" />

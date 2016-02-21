@@ -31,7 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,10 +43,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\DbModelDataGateway`1.cs" />
+    <Compile Include="common\ModelDataGateway`1.cs" />
+    <Compile Include="common\RpcHandler`1.cs" />
+    <Compile Include="contracts\IModedDataGatewayInitializable.cs" />
+    <Compile Include="contracts\IModelDataGateway`1.cs" />
+    <Compile Include="ErrorMessages.Designer.cs" />
+    <Compile Include="Exceptions.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="MessageFormats.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="notes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ErrorMessages.resx" />
+    <EmbeddedResource Include="MessageFormats.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XF.Common.Contracts\XF.Common.Contracts.csproj">
+      <Project>{2f5cb864-edc3-41c2-a477-a6dbbdb62487}</Project>
+      <Name>XF.Common.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
