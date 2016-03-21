@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{92451F53-3AC9-4DF8-87BE-AF75D5B3F0A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XF.Common.Universal</RootNamespace>
+    <AssemblyName>XF.Common.Universal</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\XF.Common.Contracts\common\XFConstants.cs">
+      <Link>common\XFConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\contracts\IContext.cs">
+      <Link>contracts\IContext.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\contracts\ICriterion.cs">
+      <Link>contracts\ICriterion.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\contracts\IMessage`1.cs">
+      <Link>contracts\IMessage`1.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\contracts\IProjection.cs">
+      <Link>contracts\IProjection.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\contracts\IRequestContext.cs">
+      <Link>contracts\IRequestContext.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\contracts\IRequest`1.cs">
+      <Link>contracts\IRequest`1.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\contracts\IResponse`1.cs">
+      <Link>contracts\IResponse`1.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\contracts\IUserIdentityProvider.cs">
+      <Link>contracts\IUserIdentityProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\enumerations\EventTypeOption.cs">
+      <Link>enumerations\EventTypeOption.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\enumerations\ExceptionMessageOption.cs">
+      <Link>enumerations\ExceptionMessageOption.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\enumerations\LoggingStrategyOption.cs">
+      <Link>enumerations\LoggingStrategyOption.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\enumerations\ModelActionOption.cs">
+      <Link>enumerations\ModelActionOption.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\enumerations\OperatorTypeOption.cs">
+      <Link>enumerations\OperatorTypeOption.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\enumerations\SeverityType.cs">
+      <Link>enumerations\SeverityType.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\enumerations\TraceEventTypeOption.cs">
+      <Link>enumerations\TraceEventTypeOption.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\enumerations\ZoneOption.cs">
+      <Link>enumerations\ZoneOption.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\models\ApplicationContext.cs">
+      <Link>models\ApplicationContext.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\models\Criterion.cs">
+      <Link>models\Criterion.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\models\ListItem.cs">
+      <Link>models\ListItem.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\models\Message`1.cs">
+      <Link>models\Message`1.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\models\Projection.cs">
+      <Link>models\Projection.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\models\RequestStatus.cs">
+      <Link>models\RequestStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\models\TypedItem.cs">
+      <Link>models\TypedItem.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\wcf\BindingTypeOption.cs">
+      <Link>wcf\BindingTypeOption.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\wcf\DataPacket.cs">
+      <Link>wcf\DataPacket.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\wcf\IDataPacketService.cs">
+      <Link>wcf\IDataPacketService.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\wcf\IRpcDataPacketService.cs">
+      <Link>wcf\IRpcDataPacketService.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\wcf\IStatusCheck.cs">
+      <Link>wcf\IStatusCheck.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\wcf\Ping.cs">
+      <Link>wcf\Ping.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\wcf\StatusCheck.cs">
+      <Link>wcf\StatusCheck.cs</Link>
+    </Compile>
+    <Compile Include="..\XF.Common.Contracts\wcf\StatusCheckServiceClient.cs">
+      <Link>wcf\StatusCheckServiceClient.cs</Link>
+    </Compile>
+    <Compile Include="common\WindowsIdentityProvider.cs" />
+    <Compile Include="compensatory\DataSet.cs" />
+    <Compile Include="compensatory\DataTable.cs" />
+    <Compile Include="compensatory\Serializable.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="wcf\ServiceClient`1.cs" />
+    <Compile Include="wcf\ServiceSettings.cs" />
+    <EmbeddedResource Include="Properties\XF.Common.Universal.rd.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

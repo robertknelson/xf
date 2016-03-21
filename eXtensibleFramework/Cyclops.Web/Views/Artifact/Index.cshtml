@@ -1,0 +1,65 @@
+﻿@model Cyclops.Web.ArtifactViewModel
+
+@{
+    ViewBag.Title = "Index";
+
+    var artifactTypeList = Cyclops.SelectListItemCache.Instance.ReadList("artifact-type");
+    var artifactScopeList = Cyclops.SelectListItemCache.Instance.ReadList("artifact-scope");
+    
+    
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("upload","artifact", FormMethod.Post, new{ @enctype = "multipart/form-data"})) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>ArtifactViewModel</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.ArtifactTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ArtifactTypeId, artifactTypeList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ArtifactTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ArtifactScopeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ArtifactScopeId, artifactScopeList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ArtifactScopeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Display, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Display, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Display, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FileUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="FileUpload" name="FileUpload"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

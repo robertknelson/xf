@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Cyclops.Selection>
+
+@{
+    ViewBag.Title = "Index";
+    var groupList = Cyclops.SelectListItemCache.Instance.ReadList("none");
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<hr />
+@Html.DropDownList("none", groupList)
+
+
+<hr/>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Display)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Token)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MasterId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Display)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Token)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MasterId)
+        </td>
+        <td>
+            @if (User.IsInRole("admin"))
+            {
+                
+                @Html.ActionLink("Edit", "Edit", new { id=item.LookupId }) @:|
+                @Html.ActionLink("Details", "Details", new { id=item.LookupId }) @:|
+                @Html.ActionLink("Delete", "Delete", new { id=item.LookupId })                
+            }
+
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Cyclops.Web.SolutionAppViewModel>
+
+@{
+    SolutionViewModel solution = ViewBag.Solution;
+    IEnumerable<SolutionAppViewModel> apps = Model.ToList();
+    var zones = Cyclops.SelectionListUtility.GetReverseZoneDictionary();
+    
+}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th colspan="3">
+                    @solution.Name - @solution.Scope
+                </th>
+            </tr>
+            <tr>
+                <th>Apps in Solution</th>
+                @foreach (var zone in solution.Zones)
+                {                           
+                    <th colspan="2">@zone</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (SolutionAppViewModel app in apps)
+            {
+                <tr>
+                    <td>@app.Application</td>
+                    @foreach (ServerAppViewModelCollection  collection in app.ZoneServerApps)
+	                {
+
+                        if (collection != null)
+                        {
+                            
+                            var data = @solution.ScopeId + "-"  + @app.AppId + "-" + collection.Key + "-" + @solution.SolutionId;
+                            <td>
+                                <a type="button" href="~/ServerApps/Create?data=@data"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                            </td>
+                            <td>
+                            @foreach (var item in collection)
+                            {
+                                
+                                <div>
+                                    
+                                    <a type="button" href="~/ServerApps/@item.ServerAppId"><img src="~/Content/Images/server.grey.png" height="25" /></a>
+                                    @item.Server
+                                    @item.ExternalIP
+                                </div>
+                                    
+                               
+                            }                               
+                            </td>
+                        }
+	                }
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+
+

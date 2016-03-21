@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{06C20F02-9CEC-4C0E-B92D-13B4CFFFC8EB}</ProjectGuid>
+    <ProjectGuid>{5A16AF55-8DB2-46AA-8632-F0E529F277D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XF.Common.Server.Contracts</RootNamespace>
-    <AssemblyName>XF.Common.Server.Contracts</AssemblyName>
+    <RootNamespace>Cyclops.Web</RootNamespace>
+    <AssemblyName>eXtensoft.Cyclops.Web</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,29 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="common\DbModelDataGateway`1.cs" />
-    <Compile Include="common\ModelDataGateway`1.cs" />
-    <Compile Include="common\RpcHandler`1.cs" />
-    <Compile Include="contracts\IModedDataGatewayInitializable.cs" />
-    <Compile Include="contracts\IModelDataGateway`1.cs" />
-    <Compile Include="Exceptions.cs" />
-    <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="MessageFormats.Designer.cs" />
-    <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="notes.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MessageFormats.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\XF.Common.Contracts\XF.Common.Contracts.csproj">
-      <Project>{2f5cb864-edc3-41c2-a477-a6dbbdb62487}</Project>
-      <Name>XF.Common.Contracts</Name>
+    <ProjectReference Include="..\eXtensoft.Cyclops.Core\eXtensoft.Cyclops.Core.csproj">
+      <Project>{663acf0c-a829-476d-876f-60731d09c18e}</Project>
+      <Name>eXtensoft.Cyclops.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eXtensoft.Cyclops.Model\eXtensoft.Cyclops.Model.csproj">
+      <Project>{b20af57d-1f5b-4ff5-ac9b-5f1e1d24f656}</Project>
+      <Name>eXtensoft.Cyclops.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

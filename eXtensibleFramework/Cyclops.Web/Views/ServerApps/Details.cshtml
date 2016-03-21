@@ -1,0 +1,139 @@
+﻿@model Cyclops.Web.ServerAppViewModel
+
+@{
+    ViewBag.Title = @Model.App;
+}
+
+<h4>@Html.DisplayFor(model => model.App) on @Html.DisplayFor(model => model.Server)</h4>
+<div class="row">
+    <div class="col-md-6">
+        <div>            
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Server)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Server)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.App)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.App)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Folderpath)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Folderpath)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.BackupFolderpath)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BackupFolderpath)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Zone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Zone)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Scope)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Scope)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Domain)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Domain)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ServerAppId }) |
+            @Html.ActionLink("Back to Server", "Details", "Servers", new { id = @Model.ServerId }, null)
+        </p>
+    
+    </div>
+    <div class="col-md-6">
+        <hr />
+        <div class="container">
+            <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Add files...</span>
+                <input id="fileupload" type="file" name="files[]" multiple>
+            </span>
+            <br />
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    <span class="sr-only">0% complete</span>
+                </div>
+            </div>
+            <br />
+            <div class="file_name"></div>
+            <br />
+            <div class="file_type"></div>
+            <br />
+            <div class="file_size"></div>
+        </div>
+
+        <ul>
+            @*@if(Model.Files != null)
+            {
+                foreach (var file in Model.Files)
+                {
+                    <li>@file.Display</li>
+                }
+            }
+            else
+            {
+                <h5>No Files</h5>
+            }*@
+        </ul>
+    </div>
+</div>
+
+
+@section scripts {
+
+    <link href="~/Content/jquery.fileupload.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.ui.widget.js"></script>
+    <script src="~/Scripts/jquery.fileupload.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                url: '/serverapps/upload?id=' + @Model.ServerAppId,
+                autoUpload: true,
+                done: function (e, data) {
+                    $('.file_name').html(data.result.name);
+                    $('.file_type').html(data.result.type);
+                    $('.file_size').html(data.result.size);
+                }
+            }).on('fileuploadprogressall', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('.progress .progress-bar').css('width', progress + '%');
+            });
+        });
+    </script>
+}
+
+
+

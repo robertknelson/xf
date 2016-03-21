@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{06C20F02-9CEC-4C0E-B92D-13B4CFFFC8EB}</ProjectGuid>
+    <ProjectGuid>{4841196C-063C-4834-8534-2D4EF9042979}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XF.Common.Server.Contracts</RootNamespace>
-    <AssemblyName>XF.Common.Server.Contracts</AssemblyName>
+    <RootNamespace>XF.Common</RootNamespace>
+    <AssemblyName>XF.SqlServer.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,8 +32,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,28 +43,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="common\DbModelDataGateway`1.cs" />
-    <Compile Include="common\ModelDataGateway`1.cs" />
-    <Compile Include="common\RpcHandler`1.cs" />
-    <Compile Include="contracts\IModedDataGatewayInitializable.cs" />
-    <Compile Include="contracts\IModelDataGateway`1.cs" />
-    <Compile Include="Exceptions.cs" />
-    <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="MessageFormats.Designer.cs" />
-    <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="notes.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MessageFormats.resx" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerModelDataGateway`1.cs" />
+    <Compile Include="SqlServerModelDataGateway`2.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XF.Common.Contracts\XF.Common.Contracts.csproj">
       <Project>{2f5cb864-edc3-41c2-a477-a6dbbdb62487}</Project>
       <Name>XF.Common.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XF.Common.Server.Contracts\XF.Common.Server.Contracts.csproj">
+      <Project>{06c20f02-9cec-4c0e-b92d-13b4cfffc8eb}</Project>
+      <Name>XF.Common.Server.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XF.Common.Server\XF.Common.Server.csproj">
+      <Project>{0e06c8e3-916e-4bca-80ad-50aef2ea8fff}</Project>
+      <Name>XF.Common.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XF.Common\XF.Common.csproj">
+      <Project>{18dff16a-8f34-4393-a15b-6abdbedb97f4}</Project>
+      <Name>XF.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\Discovery.StoredProcedures.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

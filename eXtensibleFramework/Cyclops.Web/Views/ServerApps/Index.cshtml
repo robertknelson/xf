@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Cyclops.Web.ServerAppViewModel>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ServerAppId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Server)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.App)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Folderpath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BackupFolderpath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Scope)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Domain)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Display)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServerAppId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Server)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.App)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Folderpath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BackupFolderpath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Scope )
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Domain)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Display)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
