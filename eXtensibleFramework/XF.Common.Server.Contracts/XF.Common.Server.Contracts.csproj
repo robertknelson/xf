@@ -48,6 +48,7 @@
     <Compile Include="common\RpcHandler`1.cs" />
     <Compile Include="contracts\IModedDataGatewayInitializable.cs" />
     <Compile Include="contracts\IModelDataGateway`1.cs" />
+    <Compile Include="ErrorMessages.Designer.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="MessageFormats.Designer.cs" />
@@ -58,6 +59,7 @@
     <Content Include="notes.txt" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ErrorMessages.resx" />
     <EmbeddedResource Include="MessageFormats.resx" />
   </ItemGroup>
   <ItemGroup>

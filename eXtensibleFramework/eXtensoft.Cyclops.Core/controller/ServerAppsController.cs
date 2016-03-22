@@ -75,6 +75,7 @@ namespace Cyclops.Controllers
         }
 
         // GET: ServerApps/Create
+        [HttpGet]
         public ActionResult Create(string data)
         {
             // reg-app-zone
