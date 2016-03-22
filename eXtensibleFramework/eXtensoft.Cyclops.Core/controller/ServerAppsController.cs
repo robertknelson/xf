@@ -10,7 +10,6 @@ namespace Cyclops.Controllers
     using System.Web;
     using System.Web.Mvc;
     using XF.Common;
-    //using Microsoft.AspNet.Identity;
     using System.Dynamic;
     using Cyclops.Web;
 
@@ -20,22 +19,7 @@ namespace Cyclops.Controllers
         [HttpGet]
         public ActionResult Index(Nullable<int> id)
         {
-            if (id.HasValue)
-            {
-                Criterion c = new Criterion("ServerAppId", id.Value);
-                var response = Service.GetAll<ServerApp>(c);
-                if (!response.IsOkay)
-                {
-                    return View(ErrorViewName, response.Status);
-                }
-                else
-                {
-                    var vm = new ServerAppViewModel(response.Model);
-                    return View("ServerApp",vm);
-                }                
-            }
-            else
-            {
+
                 var response = Service.GetAll<ServerApp>(null);
                 if (!response.IsOkay)
                 {
@@ -46,7 +30,7 @@ namespace Cyclops.Controllers
                     var vms = from x in response select new ServerAppViewModel(x);
                     return View(vms);
                 }
-            }
+
 
         }
 

@@ -15,17 +15,9 @@ namespace Cyclops.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "ServerApps.Create",
-                url: "serverapps/create/{id}",
-                defaults: new { controller = "ServerApps", action = "Create", id = UrlParameter.Optional }
-                );
-
-            routes.MapRoute(
-                name: "ServerApps.Index",
-                url: "serverapps/{id}",
-                defaults: new { controller = "ServerApps", action = "Index", id = UrlParameter.Optional }
-                );
-
+                name: "ServerApp",
+                url: "ServerApp/{id}",
+                defaults: new { controller="ServerApp", action="Index",id=UrlParameter.Optional });
 
             routes.MapRoute(
                 name: "Default",

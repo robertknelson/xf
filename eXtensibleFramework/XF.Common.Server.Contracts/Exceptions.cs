@@ -222,7 +222,7 @@ namespace XF.Common
             //{
             StringBuilder sb = new StringBuilder();
             string s = (ex.InnerException != null) ? ex.InnerException.Message : ex.Message;
-            sb.AppendLine(String.Format(ErrorMessages.ExceptionFormat, s));
+            sb.AppendLine(String.Format(ErrorMessages.SqlExceptionFormat, s));
             if (t != null)
             {
                 sb.AppendLine(String.Format(ErrorMessages.ModelFormat, t.ToString()));

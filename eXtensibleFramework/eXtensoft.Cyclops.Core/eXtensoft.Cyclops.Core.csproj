@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="controller\AppsController.cs" />
     <Compile Include="controller\FileUploadController.cs" />
+    <Compile Include="controller\ServerAppController.cs" />
     <Compile Include="controller\ServerAppsController.cs" />
     <Compile Include="controller\ServersController.cs" />
     <Compile Include="controller\ServiceController.cs" />

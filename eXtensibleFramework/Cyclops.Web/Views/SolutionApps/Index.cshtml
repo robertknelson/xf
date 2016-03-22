@@ -42,9 +42,8 @@
                             @foreach (var item in collection)
                             {
                                 
-                                <div>
-                                    
-                                    <a type="button" href="~/ServerApps/@item.ServerAppId"><img src="~/Content/Images/server.grey.png" height="25" /></a>
+                                <div>             
+                                    <a type="button" href="~/serverapp/@item.ServerAppId"><img src="~/Content/Images/server.blue.png" height="25" /></a>
                                     @item.Server
                                     @item.ExternalIP
                                 </div>
