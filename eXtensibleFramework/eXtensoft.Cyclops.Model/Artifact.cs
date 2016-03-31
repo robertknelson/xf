@@ -41,6 +41,7 @@ namespace Cyclops
 
         public int ArtifactScopeTypeId { get; set; }
 
+        public DateTime Tds { get; set; }
         #region constructors
         public Artifact() { }
         #endregion constructors

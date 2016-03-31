@@ -26,7 +26,9 @@ namespace Cyclops.Web
         [DataType(DataType.Html)]
         public string Display { get; set; }
 
-        public DateTimeOffset Tds { get; set; }
+        public DateTime Tds { get; set; }
+
+        public string UploadedOn { get; set; }
 
         public int ArtifactScopeTypeId { get; set; }
 
@@ -38,6 +40,8 @@ namespace Cyclops.Web
         public string ArtifactScope { get; set; }
 
         public string ArtifactScopeType { get; set; }
+
+
 
         [DataType(DataType.Upload)]
         public HttpPostedFileBase FileUpload { get; set; }
@@ -58,10 +62,11 @@ namespace Cyclops.Web
             Title = model.Title;
             ArtifactScopeTypeId = model.ArtifactScopeTypeId;
             ArtifactScopeId = model.ArtifactScopeId;
-
+            ArtifactScopeType = SelectionConverter.Convert(model.ArtifactScopeTypeId);
             ArtifactType = SelectionConverter.Convert(model.ArtifactTypeId);
 
-
+            Tds = model.Tds;
+            UploadedOn = model.Tds.ToShortDateString();
         }
 
 

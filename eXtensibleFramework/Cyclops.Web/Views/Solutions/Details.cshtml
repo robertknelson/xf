@@ -47,11 +47,20 @@
                 @Html.DisplayFor(model => model.Scope)
             </dd>
 
+            @if (User.IsInRole("admin"))
+            {
+                <dt>
+                    <a href="~/solutions/edit/@Model.SolutionId" class="glyphicon glyphicon-pencil"></a>
+
+                </dt>
+                <dd>
+
+                </dd>
+            }
         </dl>
 
         <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.SolutionId }) |
-            @Html.ActionLink("Back to List", "Index")
+            <a href="~/solutions " class="glyphicon glyphicon-list" ></a>
         </p>
     </div>
     <div class="col-md-4">
@@ -61,11 +70,19 @@
             <ul>
                 @foreach (var item in vms)
                 {
-                    <li>
-                        @Html.ActionLink(@item.Application, "details", "SolutionApps", new { id = @item.SolutionAppId }, null)
-                    </li>
+                    if (User.IsInRole(editor))
+                    {
+                        <li>
+                            @Html.ActionLink(@item.Application, "details", "SolutionApps", new { id = @item.SolutionAppId }, null)
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@item.Application</li>
+                    }
+
                 }
-            </ul>
+                </ul>
         </div>
 
 

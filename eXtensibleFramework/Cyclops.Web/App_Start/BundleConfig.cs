@@ -24,8 +24,8 @@ namespace Cyclops.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/themes/dark/bootstrap.css",
+                      "~/Content/themes/dark/site.css"));
         }
     }
 }

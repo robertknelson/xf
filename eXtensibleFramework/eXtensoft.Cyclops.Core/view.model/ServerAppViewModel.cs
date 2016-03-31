@@ -55,6 +55,7 @@ namespace Cyclops.Web
 
         public int SolutionId { get; set; }
 
+        public string BackUrl { get; set; }
         public string Display
         {
             get
@@ -85,6 +86,8 @@ namespace Cyclops.Web
             {
                 App = apps[model.AppId];
             }
+
+            Security = SelectionConverter.Convert(model.SecurityId);
 
             BackupFolderpath = model.BackupFolderpath;
             Folderpath = model.Folderpath;

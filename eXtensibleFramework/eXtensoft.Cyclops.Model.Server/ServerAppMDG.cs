@@ -208,10 +208,14 @@ namespace Cyclops
                 {
                     model.Folderpath = reader.GetString(reader.GetOrdinal("Folderpath"));
                 }
-                if (!reader.IsDBNull(reader.GetOrdinal("Folderpath")))
+                if (!reader.IsDBNull(reader.GetOrdinal("BackupFolderpath")))
                 {
                     model.BackupFolderpath = reader.GetString(reader.GetOrdinal("BackupFolderpath"));
                 }
+                model.InternalIP = reader.GetString(reader.GetOrdinal("InternalIP"));
+                model.ExternalIP = reader.GetString(reader.GetOrdinal("ExternalIP"));
+
+
                 list.Add(model);
 
             }

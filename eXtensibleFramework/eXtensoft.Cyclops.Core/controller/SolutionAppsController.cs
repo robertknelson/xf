@@ -89,7 +89,16 @@ namespace Cyclops.Controllers
         // GET: SolutionApps/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Criterion c = new Criterion("SolutionAppId", id);
+            var response = Service.Get<SolutionApp>(c);
+            if (!response.IsOkay)
+            {
+                return View(ErrorViewName, response.Status);
+            }
+            else
+            {
+                return View(new SolutionAppViewModel(response.Model));
+            }
         }
         [HttpPost]
         public ActionResult AddServerApp(ServerAppViewModel viewModel)

@@ -219,16 +219,19 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\themes\dark\bootstrap.css" />
+    <Content Include="Content\themes\dark\bootstrap.min.css" />
+    <Content Include="Content\themes\dark\site.css" />
+    <Content Include="Content\themes\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\themes\light\bootstrap.css" />
+    <Content Include="Content\themes\light\bootstrap.min.css" />
     <Content Include="Content\images\server.blue.png" />
     <Content Include="Content\images\server.green.png" />
     <Content Include="Content\images\server.grey.png" />
     <Content Include="Content\images\server.red.png" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\light\Site.css" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -240,6 +243,10 @@
     <Content Include="App_ConfigFiles\connectionStrings.config" />
     <Content Include="App_ConfigFiles\eXtensoft.app.config" />
     <Content Include="App_ConfigFiles\eXtensoft.databaseStrategy.config" />
+    <Content Include="Content\themes\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\themes\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\themes\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Properties\PublishProfiles\xfer.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -314,15 +321,20 @@
     <Content Include="Views\Zones\Create.cshtml" />
     <Content Include="Views\Shared\_FileUpload.cshtml" />
     <Content Include="Views\ServerApp\Index.cshtml" />
+    <Content Include="Views\Shared\_Documents.cshtml" />
+    <Content Include="Views\ServerApp\Edit.cshtml" />
+    <Content Include="Views\SolutionZones\Details.cshtml" />
+    <Content Include="Views\SolutionZones\Edit.cshtml" />
+    <Content Include="Views\SolutionZones\Delete.cshtml" />
+    <Content Include="Views\SolutionApps\Edit.cshtml" />
+    <Content Include="Views\SolutionApps\Details.cshtml" />
+    <Content Include="Views\SolutionApps\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_Files\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

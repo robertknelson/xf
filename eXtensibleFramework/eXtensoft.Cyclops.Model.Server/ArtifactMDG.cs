@@ -27,6 +27,10 @@ namespace Cyclops
         private const string OriginalFilenameParamName = "@originalfilename";
         private const string LocationParamName = "@location";
         private const string TitleParamName = "@title";
+        private const string ArtifactScopeTypeIdParamName = "@scopetypeid";
+        private const string ArtifactScopeIdParamName = "@scopeid";
+        private const string TdsParamName = "@tds";
+
 
         #endregion local fields
 
@@ -34,10 +38,14 @@ namespace Cyclops
 
         public override SqlCommand PostSqlCommand(SqlConnection cn, Artifact model, IContext context)
         {
+            
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
 
-            string sql = "insert into [dbo].[Artifact] ( [Id],[ArtifactTypeId],[Mime],[ContentLength],[OriginalFilename],[Location],[Title] ) values (" + IdParamName + "," + ArtifactTypeIdParamName + "," + MimeParamName + "," + ContentLengthParamName + "," + OriginalFilenameParamName + "," + LocationParamName + "," + TitleParamName + ")";
+            string sql = " BEGIN TRAN declare @artifactId int insert into [dbo].[Artifact] ( [Id],[ArtifactTypeId],[Mime],[ContentLength],[OriginalFilename],[Location],[Title] ,[Tds]) values (" + IdParamName + "," + ArtifactTypeIdParamName + "," + MimeParamName + "," + ContentLengthParamName + "," + OriginalFilenameParamName + "," + LocationParamName + "," + TitleParamName + "," + TdsParamName +  ")" +
+                " select @artifactId = SCOPE_IDENTITY()   IF @@ERROR <> 0 BEGIN ROLLBACK TRAN return  END " +
+                " insert into [dbo].[documentation] ([ArtifactId],[ArtifactScopeTypeId],[ArtifactScopeId]) values ( @artifactId ," + ArtifactScopeTypeIdParamName + "," + ArtifactScopeIdParamName + " ) " +
+                " IF @@ERROR <> 0 BEGIN ROLLBACK TRAN return  END COMMIT TRAN";
 
             cmd.CommandText = sql;
 
@@ -48,6 +56,9 @@ namespace Cyclops
             cmd.Parameters.AddWithValue(OriginalFilenameParamName, model.OriginalFilename);
             cmd.Parameters.AddWithValue(LocationParamName, model.Location);
             cmd.Parameters.AddWithValue(TitleParamName, model.Title);
+            cmd.Parameters.AddWithValue(ArtifactScopeTypeIdParamName, model.ArtifactScopeTypeId);
+            cmd.Parameters.AddWithValue(ArtifactScopeIdParamName, model.ArtifactScopeId);
+            cmd.Parameters.AddWithValue(TdsParamName, DateTimeOffset.Now);
 
             return cmd;
         }
@@ -89,7 +100,7 @@ namespace Cyclops
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
 
-            string sql = "select [ArtifactId], [Id], [ArtifactTypeId], [Mime], [ContentLength], [OriginalFilename], [Location], [Title] from [dbo].[Artifact] where [ArtifactId] = " + ArtifactIdParamName;
+            string sql = "select [ArtifactId], [Id], [ArtifactTypeId], [Mime], [ContentLength], [OriginalFilename], [Location], [Title],[Tds] from [dbo].[Artifact] where [ArtifactId] = " + ArtifactIdParamName;
 
             cmd.CommandText = sql;
 
@@ -101,10 +112,16 @@ namespace Cyclops
         {
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
-
-            string sql = "select [ArtifactId], [Id], [ArtifactTypeId], [Mime], [ContentLength], [OriginalFilename], [Location], [Title] from [dbo].[Artifact] ";
-            cmd.CommandText = sql;
-
+            if (criterion != null && criterion.ContainsStrategy())
+            {
+                string key = criterion.GetStrategyKey();
+                string sql = "select a.[ArtifactId], a.[Id], a.[ArtifactTypeId], a.[Mime], a.[ContentLength], a.[OriginalFilename],a.[Location], a.[Title], a.[Tds],d.[DocumentId]," +
+                    "d.[ArtifactScopeTypeId],d.[ArtifactScopeId] from [dbo].[Artifact] as a INNER JOIN [dbo].[Documentation] as d ON a.[ArtifactId] = d.[ArtifactId] " +
+                "where d.[ArtifactScopeTypeId] = " + ArtifactScopeTypeIdParamName + " and  d.[ArtifactScopeId] = " + ArtifactScopeIdParamName;
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue(ArtifactScopeTypeIdParamName, criterion.GetValue<int>("ScopeTypeId"));
+                cmd.Parameters.AddWithValue(ArtifactScopeIdParamName, criterion.GetValue<int>("ScopeId"));
+            }
             return cmd;
         }
         public override SqlCommand GetAllProjectionsSqlCommand(SqlConnection cn, ICriterion criterion, IContext context)
@@ -136,6 +153,9 @@ namespace Cyclops
                 model.OriginalFilename = reader.GetString(reader.GetOrdinal("OriginalFilename"));
                 model.Location = reader.GetString(reader.GetOrdinal("Location"));
                 model.Title = reader.GetString(reader.GetOrdinal("Title"));
+                model.Tds = reader.GetDateTimeOffset(reader.GetOrdinal("Tds")).LocalDateTime;
+                model.ArtifactScopeTypeId = reader.GetInt32(reader.GetOrdinal("ArtifactScopeTypeId"));
+                model.ArtifactScopeId = reader.GetInt32(reader.GetOrdinal("ArtifactScopeId"));
                 list.Add(model);
 
             }

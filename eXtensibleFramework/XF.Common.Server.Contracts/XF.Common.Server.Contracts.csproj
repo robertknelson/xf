@@ -7,7 +7,7 @@
     <ProjectGuid>{06C20F02-9CEC-4C0E-B92D-13B4CFFFC8EB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XF.Common.Server.Contracts</RootNamespace>
+    <RootNamespace>XF.Common</RootNamespace>
     <AssemblyName>XF.Common.Server.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -48,6 +48,11 @@
     <Compile Include="common\RpcHandler`1.cs" />
     <Compile Include="contracts\IModedDataGatewayInitializable.cs" />
     <Compile Include="contracts\IModelDataGateway`1.cs" />
+    <Compile Include="ErrorMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Exceptions.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="MessageFormats.Designer.cs" />
@@ -58,6 +63,10 @@
     <Content Include="notes.txt" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ErrorMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="MessageFormats.resx" />
   </ItemGroup>
   <ItemGroup>

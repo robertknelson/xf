@@ -34,9 +34,8 @@ namespace Cyclops.Controllers
 
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, Nullable<int> serverapps)
         {
-
             var criterion = new Criterion("ServerAppId", id);
             var response = Service.Get<ServerApp>(criterion);
             if (!response.IsOkay)
@@ -45,15 +44,20 @@ namespace Cyclops.Controllers
             }
             else
             {
-                var vm = new ServerAppViewModel(response.Model);
+                var vm = new ServerAppViewModel(response.Model) {};
+                var qs = Request.QueryString;
+                if (qs != null)
+                {
+                    int sid;
+                    string idCandidate = qs[qs.AllKeys[0]];
+                    if (!String.IsNullOrWhiteSpace(idCandidate) && Int32.TryParse(idCandidate, out sid))
+                    {
+                        vm.BackUrl = String.Format("{0}?id={1}", qs.Keys[0], idCandidate);
+                        vm.SolutionId = sid;
+                    }
+                    
+                }
 
-                var c = new Criterion("ModelId", id);
-                c.AddItem("ModelType", "server-app");
-                //var fileResponse = Service.GetAllProjections<InSituFile>(c);
-                //if (fileResponse.IsOkay)
-                //{
-                //    vm.Files = fileResponse.Display.ToList();
-                //}
                 return View(vm);
             }
         }
@@ -104,7 +108,7 @@ namespace Cyclops.Controllers
         }
 
         // GET: ServerApps/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, Nullable<int> solutionapps)
         {
             var criterion = new Criterion("ServerAppId", id);
             var response = Service.Get<ServerApp>(criterion);
@@ -114,7 +118,8 @@ namespace Cyclops.Controllers
             }
             else
             {
-                return View(new ServerAppViewModel(response.Model));
+                int i = solutionapps.HasValue ? solutionapps.Value : -1;
+                return View(new ServerAppViewModel(response.Model) { SolutionId = i});
             }
         }
 
@@ -135,7 +140,7 @@ namespace Cyclops.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Details", new { id = viewModel.ServerAppId });
+                    return RedirectToAction("Details", new { id = viewModel.ServerAppId, solutionapps = viewModel.SolutionId });
                 }
             }
         }

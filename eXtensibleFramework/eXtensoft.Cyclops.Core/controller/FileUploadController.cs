@@ -5,9 +5,11 @@ namespace Cyclops.Controllers
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.IO;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using Web;
     using XF.Common;
 
     //[Authorize(Roles="guest,member,admin")]
@@ -121,5 +123,54 @@ namespace Cyclops.Controllers
             {"u","usage"},
             {"usage","usage"},
         };
+
+        [HttpPost]
+        public ActionResult Upload(ArtifactViewModel viewModel)
+        {
+
+            ActionResult result = null;
+
+            var validMimes = new string[] { "image/png", "image/jpeg", "image/gif" };
+
+
+            if (viewModel.IsValid())
+            {
+                var m = viewModel.ToModel();
+                m.Mime = viewModel.FileUpload.ContentType;
+                m.ContentLength = viewModel.FileUpload.ContentLength;
+                m.OriginalFilename = viewModel.FileUpload.FileName;
+                m.Id = Guid.NewGuid();
+
+                var fileExtension = m.OriginalFilename.Substring(m.OriginalFilename.LastIndexOf('.'));
+
+                if (viewModel.FileUpload != null && viewModel.FileUpload.ContentLength > 0)
+                {
+                    var filename = m.Id.ToString().Trim(new char[] { '{', '}' }) + fileExtension ;
+                        var uploadDirectory = "~/app_files/file-uploads/";
+                    string folderpath = Path.Combine(Server.MapPath(uploadDirectory), m.Mime.Replace('/', '-').Replace('+','-'));
+                    if (!Directory.Exists(folderpath))
+                    {
+                        Directory.CreateDirectory(folderpath);
+                    }
+                    //m.Location = Path.Combine(Server.MapPath(uploadDirectory), filename);
+                    m.Location = Path.Combine(Server.MapPath(uploadDirectory), m.Mime.Replace('/', '-').Replace('+','-'), filename);
+                    var response = Service.Post<Artifact>(m);
+                    if (response.IsOkay)
+                    {
+                        viewModel.FileUpload.SaveAs(m.Location);
+                    }
+
+
+                }
+                result = RedirectToAction("index", new { id = viewModel.ArtifactScopeId });
+            }
+            else
+            {
+                result = RedirectToAction("index", viewModel.ArtifactScopeId);
+            }
+
+
+            return result;
+        }
     }
 }

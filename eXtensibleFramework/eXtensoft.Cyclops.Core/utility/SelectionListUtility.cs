@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cyclops.Web;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -172,6 +173,23 @@ namespace Cyclops
                                        Group = SelectionConverter.Convert(x.ScopeId)
                                    }).OrderBy(y => y.Group), "Id", "Name", "Group", 1);
         }
+
+        public static List<ArtifactViewModel> GetArtifacts(int scopeTypeId, int scopeId)
+        {
+            var criterion = Criterion.GenerateStrategy("get.for");
+            criterion.AddItem("ScopeTypeId", scopeTypeId);
+            criterion.AddItem("ScopeId", scopeId);
+            var service = GetService();
+            var response = service.GetAll<Artifact>(criterion);
+            return (from x in response
+                    select new ArtifactViewModel(x)
+                    {
+
+
+
+                    }).ToList();
+        }
+
 
         public static List<SelectListItem> GetApps()
         {

@@ -11,16 +11,15 @@
         ArtifactScopeTypeId = scopeTypes["server-app-artifact"],
         ArtifactScopeId = Model.ServerAppId,
         ArtifactScope = Model.Display,
+        ArtifactScopeType = "serverapp"
     };
 
     var s = data.ArtifactScope;
 
 }
 
-<h2>ServerApp</h2>
-
 <div>
-    <h4>ServerAppViewModel</h4>
+    <h4>@s</h4>
     <hr />
 
     <div class="row">
@@ -91,54 +90,7 @@
                     @Html.DisplayFor(model => model.Domain)
                 </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.ZoneId)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.ZoneId)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.ScopeId)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.ScopeId)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.DomainId)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.DomainId)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Url)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Url)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.ServerId)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.ServerId)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.AppId)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.AppId)
-                </dd>
-
+ 
                 <dt>
                     @Html.DisplayNameFor(model => model.GroupName)
                 </dt>
@@ -196,14 +148,6 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.SolutionId)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.SolutionId)
-                </dd>
-
-                <dt>
                     @Html.DisplayNameFor(model => model.Display)
                 </dt>
 
@@ -214,15 +158,34 @@
             </dl>
        
             <p>
-                @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                <a href="~/serverapps/edit/@Model.ServerAppId " class="glyphicon glyphicon-pencil" />
                 @Html.ActionLink("Back to List", "Index")
             </p>        
          </div>
-        <div class="col-md-6">
-            <h4>Server App</h4>
-            <div>
-                @Html.Partial("_FileUpload", data)
+
+
+
+            <div class="col-md-6">
+
+                <div>
+                    @Html.Partial("_Documents", data)
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a type="button" data-toggle="collapse" data-parent="#accordion" href="#new-deployment"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                    </h4>
+                </div>
+                <div id="new-deployment" class="panel-collapse collapse">
+                    @Html.Partial("_FileUpload", data)
+                </div>
+
+
+
             </div>
+
         </div>
-    </div>
  </div>
+
+
+

@@ -17,9 +17,9 @@ namespace Cyclops.Controllers
         [HttpGet]
         public ActionResult Index (Nullable<int> id)
         {
-
-            Criterion c = new Criterion("ServerAppId", id);
-            var response = Service.GetAll<ServerApp>(c);
+            var c = Criterion.GenerateStrategy("server.app");
+            c.AddItem("ServerAppId", id);
+            var response = Service.Get<ServerApp>(c);
             if (!response.IsOkay)
             {
                 return View(ErrorViewName, response.Status);

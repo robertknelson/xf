@@ -222,7 +222,7 @@ namespace XF.Common
             //{
             StringBuilder sb = new StringBuilder();
             string s = (ex.InnerException != null) ? ex.InnerException.Message : ex.Message;
-            sb.AppendLine(String.Format(ErrorMessages.SqlExceptionFormat, s));
+            sb.AppendLine(String.Format(ErrorMessages.ExceptionFormat, s));
             if (t != null)
             {
                 sb.AppendLine(String.Format(ErrorMessages.ModelFormat, t.ToString()));
@@ -395,7 +395,7 @@ namespace XF.Common
                 sb.AppendLine(String.Format(ErrorMessages.ICriterionFormat, criterion.ToString()));
             }
             sb.AppendLine(String.Format(ErrorMessages.IContextFormat, context.ToString()));
-            string verboseMessage = String.Format(ErrorMessages.ResourceNotFoundFormatVerbose, GetModelType<T>().FullName, modelActionOption, sb.ToString(), message.Id);
+            string verboseMessage = String.Format(ErrorMessages.ResourceNotFoundFormatVerbose, GetModelType<T>().FullName, modelActionOption, "implementor", sb.ToString(), message.Id);
             message.Add(ExceptionMessageOption.Log, verboseMessage);
             //}
             //else
