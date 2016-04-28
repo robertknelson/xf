@@ -15,29 +15,37 @@ namespace Cyclops.Controllers
     {
         // GET: Server
         [Authorize(Roles = "member")]
-        public ActionResult Index()
+        public ActionResult Index(Nullable<int> id)
         {
-            string sortby;
-            var c = GetParameters(Request, out sortby);
-
-            var response = Service.GetAll<Server>(c);
-            if (!response.IsOkay)
+            if (id != null && id.HasValue)
             {
-                return View(ErrorViewName, response.Status);
+                return RedirectToAction("Details", new { id = id.Value });
             }
             else
             {
-                var unsorted = from x in response
-                               select new ServerViewModel(x);
-                var items = Sort(unsorted, sortby);
-                return View(items);
+                string sortby;
+                var c = GetParameters(Request, out sortby);
+
+                var response = Service.GetAll<Server>(c);
+                if (!response.IsOkay)
+                {
+                    return View(ErrorViewName, response.Status);
+                }
+                else
+                {
+                    var unsorted = from x in response
+                                   select new ServerViewModel(x);
+                    var items = Sort(unsorted, sortby);
+                    return View(items);
+                }
             }
+
         }
 
 
         // GET: Server/Details/5
         [Authorize(Roles = "member")]
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, Nullable<int> solutionapps)
         {
             var criterion = new Criterion("ServerId", id);
             var response = Service.Get<Server>(criterion);
@@ -47,7 +55,25 @@ namespace Cyclops.Controllers
             }
             else
             {
-                return View(new ServerViewModel(response.Model));
+
+                var vm = new ServerViewModel(response.Model) { };
+                var qs = Request.QueryString;
+                if (qs != null && qs.AllKeys.Count() > 0)
+                {
+                    int sid;
+                    string idCandidate = qs[qs.AllKeys[0]];
+                    if (!String.IsNullOrWhiteSpace(idCandidate) && Int32.TryParse(idCandidate, out sid))
+                    {
+                        vm.BackUrl = String.Format("{0}?id={1}", qs.Keys[0], idCandidate);
+                        vm.SolutionId = sid;
+                    }
+
+                }
+
+
+
+
+                return View(vm);
             }
         }
 

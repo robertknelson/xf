@@ -24,6 +24,7 @@ namespace XF.Common
         public static readonly string ServicePlugins;
         public static readonly string ModelDataGatewayPlugins;
         public static readonly string RemoteProcedureCallPlugins;
+        public static readonly string WebApiControllerPlugins;
         public static readonly string DbConfigs;
         public static readonly string BaseDirectory;
         public static readonly string Context;
@@ -63,6 +64,7 @@ namespace XF.Common
                 ModelDataGatewayPlugins = configFolder + "\\" + "mdg";
                 ServicePlugins = configFolder + "\\" + "services";
                 RemoteProcedureCallPlugins = configFolder + "\\" + "rpc";
+                WebApiControllerPlugins = configFolder + "\\" + "api";
                 DbConfigs = configFolder + "\\" + "db.configs";
                 BaseDirectory = configFolder;
                 var configfilemap = new ExeConfigurationFileMap() { ExeConfigFilename = configfilepath };

@@ -242,6 +242,32 @@ namespace Cyclops
 
         }
 
+        public static List<Favorite> GetFavorites(string user)
+        {
+            return GetFavorites(user, String.Empty);
+        }
+
+        public static List<Favorite> GetFavorites(string user, string model)
+        {
+            var c = Criterion.GenerateStrategy("for.user");
+            c.AddItem("Username", user);
+            if (!String.IsNullOrWhiteSpace(model))
+            {
+                c.AddItem("Model", model);
+            }
+            var service = GetService();
+            var response = service.GetAll<Favorite>(c);
+            if (response.IsOkay)
+            {
+                return response.ToList();
+            }
+            else
+            {
+                return new List<Favorite>();
+            }
+
+        }
+
         public static Dictionary<int, string> GetServerDictionary()
         {
             var service = GetService();

@@ -1,0 +1,66 @@
+<div class="navbar navbar-fixed-top navbar-default">
+    <div class="navbar-header"><a class="navbar-brand" href="#">Present Ideas</a><a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <img src="http://placehold.it/18x19" class="img-responsive" contenteditable="false">
+      </a>
+    </div>
+    <div class="container">
+        <div class="navbar-collapse target">
+            <ul class="nav target navbar-nav">
+                <li class="active"><a href="#" class="">Home</a>
+
+                </li>
+                <li><a href="#" class="">Blog<i class="glyphicon glyphicon-cog"></i></a>
+
+                </li>
+                <li><a href="#" class="">About</a>
+
+                </li>
+                <li><a href="#" class="">Help</a>
+
+                </li>
+                <li class="dropdown" id="accountmenu"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account Settings<b class="caret"></b></a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="">Login</a>
+
+                        </li>
+                        <li class="dropdown-submenu"> <a tabindex="-1" href="#" class="">More options</a>
+
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#" class="">Second level</a>
+
+                                </li>
+                                <li class="dropdown-submenu"> <a href="#" class="">More..</a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" class="">3rd level</a>
+
+                                        </li>
+                                        <li><a href="#" class="">3rd level</a>
+
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#" class="">Second level</a>
+
+                                </li>
+                                <li><a href="#" class="">Second level</a>
+
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#" class="">Register</a>
+
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="">Logout</a>
+
+                        </li>
+            </ul>
+            </li>
+            </ul>
+            <ul class="nav pull-right navbar-nav"></ul>
+        </div>
+        <!--/.navbar-collapse -->
+    </div>
+</div>

@@ -219,6 +219,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\app.datastore.png" />
+    <Content Include="Content\images\app.processing.png" />
+    <Content Include="Content\images\app.webservice.png" />
+    <Content Include="Content\images\app.website.png" />
+    <Content Include="Content\images\app.mongo.png" />
+    <Content Include="Content\images\app.windows.png" />
+    <Content Include="Content\images\server.webserver.png" />
     <Content Include="Content\themes\dark\bootstrap.css" />
     <Content Include="Content\themes\dark\bootstrap.min.css" />
     <Content Include="Content\themes\dark\site.css" />
@@ -329,6 +336,8 @@
     <Content Include="Views\SolutionApps\Edit.cshtml" />
     <Content Include="Views\SolutionApps\Details.cshtml" />
     <Content Include="Views\SolutionApps\Delete.cshtml" />
+    <Content Include="Views\Shared\_AddFavorite.cshtml" />
+    <Content Include="Views\Favorites\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

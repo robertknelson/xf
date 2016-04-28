@@ -65,13 +65,26 @@ namespace Cyclops.Web
         public int ServerSecurityId { get; set; }
         public int HostPlatformId { get; set; }
 
+        public string BackUrl { get; set; }
+        public int SolutionId { get; set; }
+
+        public bool IsFavorite { get; set; }
         #endregion properties
 
         public ServerViewModel() { }
 
         public ServerViewModel(Server model)
         {
+
+            string name =  System.Security.Principal.WindowsPrincipal.Current.Identity.Name;
+            //string user = System.Security.Principal.User.Identity.GetUserName();
+            var favorites = SelectionListUtility.GetFavorites(name, "server");
             ServerId = model.ServerId;
+            var found = favorites.Find(x => x.ModelId.Equals(model.ServerId));
+            if (found != null)
+            {
+                IsFavorite = true;
+            }
             OperatingSystem = SelectionConverter.Convert(model.OperatingSystemId);
             HostPlatform = SelectionConverter.Convert(model.HostPlatformId);
             ServerSecurity = SelectionConverter.Convert(model.SecurityId);

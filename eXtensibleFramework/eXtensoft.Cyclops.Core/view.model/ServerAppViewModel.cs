@@ -56,6 +56,10 @@ namespace Cyclops.Web
         public int SolutionId { get; set; }
 
         public string BackUrl { get; set; }
+        public bool IsFavorite { get; set; }
+
+        public bool IsServerFavorite { get; set; }
+        public bool IsAppFavorite { get; set; }
         public string Display
         {
             get
@@ -72,10 +76,32 @@ namespace Cyclops.Web
 
         public ServerAppViewModel(ServerApp model)
         {
+            string name = System.Security.Principal.WindowsPrincipal.Current.Identity.Name;
+            //string user = System.Security.Principal.User.Identity.GetUserName();
+            var favServerApps = SelectionListUtility.GetFavorites(name, "serverapp");
+            var favServers = SelectionListUtility.GetFavorites(name, "server");
+            var favApps = SelectionListUtility.GetFavorites(name, "app");
+            ServerAppId = model.ServerAppId;
+            var found = favServerApps.Find(x => x.ModelId.Equals(model.ServerAppId));
+            if (found != null)
+            {
+                IsFavorite = true;
+            }
+            var serverFound = favServerApps.Find(x => x.ModelId.Equals(model.ServerAppId));
+            if (serverFound != null)
+            {
+                IsServerFavorite = true;
+            }
+            var appFound = favApps.Find(x => x.ModelId.Equals(model.AppId));
+            if (appFound != null)
+            {
+                IsAppFavorite = true;
+            }
+
             var servers = SelectionListUtility.GetServerDictionary();
             var apps = SelectionListUtility.GetAppDictionary();
             var zones = SelectionListUtility.GetZoneDictionary();
-            ServerAppId = model.ServerAppId;
+
             ServerId = model.ServerId;
             if (servers.ContainsKey(model.ServerId))
             {

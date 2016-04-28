@@ -30,6 +30,7 @@ namespace Cyclops
         private const string ArtifactScopeTypeIdParamName = "@scopetypeid";
         private const string ArtifactScopeIdParamName = "@scopeid";
         private const string TdsParamName = "@tds";
+        private const string DocumentIdParamName = "@docid";
 
 
         #endregion local fields
@@ -99,8 +100,20 @@ namespace Cyclops
         {
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
+            string sql = String.Empty;
+            if (criterion.ContainsStrategy())
+            {
+                sql = "select a.[ArtifactId], a.[Id], a.[ArtifactTypeId], a.[Mime], a.[ContentLength], a.[OriginalFilename],a.[Location], a.[Title], a.[Tds],d.[DocumentId]," +
+                "d.[ArtifactScopeTypeId],d.[ArtifactScopeId] from [dbo].[Artifact] as a INNER JOIN [dbo].[Documentation] as d ON a.[ArtifactId] = d.[ArtifactId] " +
+                "where d.[DocumentId] =  " + DocumentIdParamName;
+                cmd.Parameters.AddWithValue(DocumentIdParamName, criterion.GetValue<int>("DocumentId"));
+            }
+            else
+            {
 
-            string sql = "select [ArtifactId], [Id], [ArtifactTypeId], [Mime], [ContentLength], [OriginalFilename], [Location], [Title],[Tds] from [dbo].[Artifact] where [ArtifactId] = " + ArtifactIdParamName;
+                sql = "select [ArtifactId], [Id], [ArtifactTypeId], [Mime], [ContentLength], [OriginalFilename], [Location], [Title],[Tds] from [dbo].[Artifact] where [ArtifactId] = " + ArtifactIdParamName;
+
+            }
 
             cmd.CommandText = sql;
 
@@ -156,6 +169,11 @@ namespace Cyclops
                 model.Tds = reader.GetDateTimeOffset(reader.GetOrdinal("Tds")).LocalDateTime;
                 model.ArtifactScopeTypeId = reader.GetInt32(reader.GetOrdinal("ArtifactScopeTypeId"));
                 model.ArtifactScopeId = reader.GetInt32(reader.GetOrdinal("ArtifactScopeId"));
+                if (reader.FieldExists("DocumentId"))
+                {
+                    model.DocumentId = reader.GetInt32(reader.GetOrdinal("DocumentId"));
+                }
+                
                 list.Add(model);
 
             }

@@ -11,23 +11,29 @@ namespace Cyclops.Controllers
     using XF.Common;
     using Cyclops.Web;
 
-    public class AppsController : ServiceController
+    public class AppsController : FileUploadController
     {
-        public ActionResult Index()
+        public ActionResult Index(Nullable<int> id)
         {
-
-            var c = GetParameters(Request);
-
-            var response = Service.GetAll<App>(c);
-            if (!response.IsOkay)
+            if (id != null && id.HasValue)
             {
-                return View(ErrorViewName, response.Status);
+                return RedirectToAction("Details", new { id = id.Value });
             }
             else
             {
-                var items = from x in response
-                            select new AppViewModel(x);
-                return View(items);
+                var c = GetParameters(Request);
+
+                var response = Service.GetAll<App>(c);
+                if (!response.IsOkay)
+                {
+                    return View(ErrorViewName, response.Status);
+                }
+                else
+                {
+                    var items = from x in response
+                                select new AppViewModel(x);
+                    return View(items);
+                }
             }
         }
 

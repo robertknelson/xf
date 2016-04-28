@@ -8,7 +8,9 @@
     var appsOnServer = Cyclops.SelectionListUtility.GetAppsOnServer(@Model.ServerId);
     var vms = from x in appsOnServer
               select new ServerAppViewModel(x);
-    
+
+    Tuple<string, int,bool> favorite = new Tuple<string, int,bool>("server", Model.ServerId,Model.IsFavorite);
+
 }
 
 <h2>@Html.DisplayFor(model =>model.Name)</h2>
@@ -17,6 +19,9 @@
         <h4>Server</h4>
         <hr />
         <dl class="dl-horizontal">
+
+            @Html.Partial("_AddFavorite", favorite)
+
             <dt>
                 @Html.DisplayNameFor(model => model.ServerId)
             </dt>
@@ -106,7 +111,14 @@
 
             }
 
+            @if (!String.IsNullOrWhiteSpace(Model.BackUrl))
+            {
 
+                <dt>
+                    <a href = "~/@Model.BackUrl" class="glyphicon glyphicon-alert"></a>
+                </dt>
+                <dd></dd>
+            }
         </dl>
         <p><a href="~/servers" class="glyphicon glyphicon-list"></a></p>      
     </div>
@@ -127,7 +139,7 @@
                 @foreach (var item in vms)
                 {
                     <li>
-                        @Html.ActionLink(@item.Display, "details", "ServerApps", new { id = @item.ServerAppId }, null)
+                        @Html.ActionLink(@item.Display, "details", "ServerApps", new { id = @item.ServerAppId , servers = @item.ServerId}, null)
                     </li>
                 }
             </ul>

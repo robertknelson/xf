@@ -46,6 +46,7 @@
     <Compile Include="Component.cs" />
     <Compile Include="ComponentConstruct.cs" />
     <Compile Include="Construct.cs" />
+    <Compile Include="Favorite.cs" />
     <Compile Include="MetaFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selection.cs" />

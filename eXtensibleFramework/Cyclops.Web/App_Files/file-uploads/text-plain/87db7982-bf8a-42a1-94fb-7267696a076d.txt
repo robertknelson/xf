@@ -1,0 +1,42 @@
+Fire up new eBook & eAudio from scratch
+
+Patron Transactions
+	Load
+		small	SubscriptionIsbn
+		several	LibraryIsbn
+	Test
+		
+		
+	Write a scenario based client code to execute a set of api use cases 
+	for serial/simultaneous use scenarios with single tenant, with before
+	and after state testing
+	Write a scenario based client code to execute a set of api use cases
+	for serial/simultaneous use scenarios for sibling-parent sharing tenants, with before
+	and after state testing
+		
+		
+	Enumerate reporting queries to determine which
+	ones require reworking
+	Enumerate Admin related query adjustments
+	Admin related UX changes
+	
+Fulfillments
+	develop the sql insertions for the Fulfillment service
+		both positive and negative
+	develop the JOBs
+
+	
+	
+	Ownership/Availability state & deltas --> SOLR
+
+	ASP.Net Membership --> ASP.Net Identity
+	
+METL adjustments		
+Transaction Optimizations
+
+eMagazine
+	Transactions
+	
+	Product Fulfillments
+	
+eMag METL

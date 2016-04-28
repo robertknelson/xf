@@ -41,7 +41,7 @@ namespace Cyclops.Web
 
         public string ArtifactScopeType { get; set; }
 
-
+        public int DocumentId { get; set; }
 
         [DataType(DataType.Upload)]
         public HttpPostedFileBase FileUpload { get; set; }
@@ -54,6 +54,7 @@ namespace Cyclops.Web
 
         public ArtifactViewModel(Artifact model)
         {
+            DocumentId = model.DocumentId;
             ArtifactId = model.ArtifactId;
             ArtifactTypeId = model.ArtifactTypeId;
             Mime = model.Mime;

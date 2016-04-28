@@ -1,0 +1,24 @@
+
+USE OneClick
+
+SELECT        llt.LibraryId, t.ISBN, llt.TitleId, llt.CollectionId, llt.SimultaneousUsageTypeId, llt.Expiry, llt.RemainingCirculations, llt.IsActive, llt.IsAvailable, 
+                         llt.ModificationTimestamp, llt.CreationTimestamp, lpt.UsageTermsId, lpt.SimultaneousUsageTypeId AS Expr1, lpt.DurationDays, lpt.MaximumCirculations, 
+                         lpt.HydratedModelId
+FROM            Holdings.LibraryLendableTitleTable AS llt INNER JOIN
+                         Holdings.LibraryPurchaseTable AS lpt ON llt.AdditionPurchaseId = lpt.Id INNER JOIN
+                         ProductCatalog.TitleTable AS t ON llt.TitleId = t.Id where CollectionId is null and llt.LibraryId = 494
+
+
+						 
+/****** Script for SelectTopNRows command from SSMS  ******/
+
+SELECT * FROM [dp_coreii].[holding].[PatronInterest] where PatronInterestId > 1317452 order by PatronInterestId desc
+
+SELECT * FROM [dp_coreii].[holding].[PatronInterestTransaction] where patroninterestid > 1317452 order by PatronInterestTransactionId desc
+
+
+--delete FROM [dp_coreii].[holding].[PatronInterestTransaction] where patroninterestid > 1317452
+--delete FROM [dp_coreii].[holding].[PatronInterest] where PatronInterestId > 1317452
+
+
+Data Source=107.23.84.86;Initial Catalog=OneClick;User ID=OCD;

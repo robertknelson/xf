@@ -124,6 +124,30 @@ namespace Cyclops.Controllers
             {"usage","usage"},
         };
 
+        [HttpGet]
+        public FileResult Download(int id)
+        {
+
+            if (id > 0)
+            {
+                var c = Criterion.GenerateStrategy("by.documentid");
+                var criterion = new Criterion("DocumentId", id);
+                var response = Service.Get<Artifact>(criterion);
+                if (!response.IsOkay)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+
+            return File("", System.Net.Mime.MediaTypeNames.Application.Octet);
+        }
+
+
+
         [HttpPost]
         public ActionResult Upload(ArtifactViewModel viewModel)
         {
@@ -139,6 +163,7 @@ namespace Cyclops.Controllers
                 m.Mime = viewModel.FileUpload.ContentType;
                 m.ContentLength = viewModel.FileUpload.ContentLength;
                 m.OriginalFilename = viewModel.FileUpload.FileName;
+
                 m.Id = Guid.NewGuid();
 
                 var fileExtension = m.OriginalFilename.Substring(m.OriginalFilename.LastIndexOf('.'));
@@ -172,5 +197,8 @@ namespace Cyclops.Controllers
 
             return result;
         }
+
+
+
     }
 }

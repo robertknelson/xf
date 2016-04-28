@@ -13,6 +13,7 @@
     <tr>
         <th>
         </th>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -35,6 +36,12 @@
     <tr>
         <td>
             <a href="~/apps/details/@item.AppId" class="glyphicon glyphicon-list-alt" />
+        </td>
+        <td>
+            @if (item.IsFavorite)
+            {
+                <span class="glyphicon glyphicon-star"></span>
+            }
         </td>
         <td>
             @Html.HiddenFor(modelItem => item.AppId)

@@ -40,6 +40,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
@@ -48,6 +49,9 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,10 +60,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EndpointServiceController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XF.Common.Contracts\XF.Common.Contracts.csproj">
+      <Project>{2f5cb864-edc3-41c2-a477-a6dbbdb62487}</Project>
+      <Name>XF.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XF.Common.Server.Contracts\XF.Common.Server.Contracts.csproj">
+      <Project>{06c20f02-9cec-4c0e-b92d-13b4cfffc8eb}</Project>
+      <Name>XF.Common.Server.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XF.Common.Server\XF.Common.Server.csproj">
+      <Project>{0e06c8e3-916e-4bca-80ad-50aef2ea8fff}</Project>
+      <Name>XF.Common.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XF.Common\XF.Common.csproj">
+      <Project>{18dff16a-8f34-4393-a15b-6abdbedb97f4}</Project>
+      <Name>XF.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XF.WebApi.Common.Contracts\XF.WebApi.Common.Contracts.csproj">
+      <Project>{5c00d08c-e662-468c-a830-2a56284012a8}</Project>
+      <Name>XF.WebApi.Common.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

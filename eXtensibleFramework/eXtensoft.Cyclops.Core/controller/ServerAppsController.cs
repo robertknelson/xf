@@ -13,12 +13,18 @@ namespace Cyclops.Controllers
     using System.Dynamic;
     using Cyclops.Web;
 
-    public class ServerAppsController : ServiceController
+    public class ServerAppsController : FileUploadController
     {
         // GET: ServerApps
         [HttpGet]
         public ActionResult Index(Nullable<int> id)
         {
+            if (id != null && id.HasValue)
+            {
+                return RedirectToAction("Details", new { id = id.Value });
+            }
+            else
+            {
 
                 var response = Service.GetAll<ServerApp>(null);
                 if (!response.IsOkay)
@@ -31,7 +37,7 @@ namespace Cyclops.Controllers
                     return View(vms);
                 }
 
-
+            }
         }
 
         public ActionResult Details(int id, Nullable<int> serverapps)
@@ -46,7 +52,7 @@ namespace Cyclops.Controllers
             {
                 var vm = new ServerAppViewModel(response.Model) {};
                 var qs = Request.QueryString;
-                if (qs != null)
+                if (qs != null && qs.AllKeys.Count() > 0)
                 {
                     int sid;
                     string idCandidate = qs[qs.AllKeys[0]];
