@@ -115,22 +115,33 @@ namespace Cyclops
             int i = 0;
             if (criterion != null)
             {
-                foreach (TypedItem item in criterion.Items)
+                if (!criterion.ContainsStrategy())
                 {
-                    if (maps.ContainsKey(item.Key))
+
+                    foreach (TypedItem item in criterion.Items)
                     {
-                        if (i == 0)
+                        if (maps.ContainsKey(item.Key))
                         {
-                            sb.Append(" where ");
+                            if (i == 0)
+                            {
+                                sb.Append(" where ");
+                            }
+                            else
+                            {
+                                sb.Append(" and ");
+                            }
+                            sb.Append(maps[item.Key]);
+                            string paramName = String.Format("@{0}", item.Key.ToLower());
+                            cmd.Parameters.AddWithValue(paramName, item.Value);
                         }
-                        else
-                        {
-                            sb.Append(" and ");
-                        }
-                        sb.Append(maps[item.Key]);
-                        string paramName = String.Format("@{0}", item.Key.ToLower());
-                        cmd.Parameters.AddWithValue(paramName, item.Value);
                     }
+                }
+                else if(criterion.Contains("key"))
+                {
+                    string key = criterion.GetValue<string>("key");
+                    sb.Append(" where ");
+                    sb.Append(maps[key]);
+                    cmd.Parameters.AddWithValue("@q", criterion.GetValue<string>("q"));
                 }
             }
 
@@ -200,6 +211,8 @@ namespace Cyclops
             {"Tags","[Tags] like '%'+ @tags + '%'"},
             {"Name","[Name] like '%' + @name + '%'"},
             {"ServerSecurityId", "[ServerSecurityId] = @serversecurityid"},
+            {"IP","[ExternalIP] like '%' +  @q + '%' OR [InternalIP] like '%' + @q + '%' " },
+            {"Alpha" ,"[Name] like '%' + @q + '%' OR [Tags] like '%' + @q + '%' "} ,
         };
 
     }

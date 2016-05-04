@@ -219,6 +219,17 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\icons\app.datastore.png" />
+    <Content Include="Content\icons\app.mongo.png" />
+    <Content Include="Content\icons\app.processing.png" />
+    <Content Include="Content\icons\app.webservice.png" />
+    <Content Include="Content\icons\app.website.png" />
+    <Content Include="Content\icons\app.windows.png" />
+    <Content Include="Content\icons\server.blue.png" />
+    <Content Include="Content\icons\server.green.png" />
+    <Content Include="Content\icons\server.grey.png" />
+    <Content Include="Content\icons\server.red.png" />
+    <Content Include="Content\icons\server.webserver.png" />
     <Content Include="Content\images\app.datastore.png" />
     <Content Include="Content\images\app.processing.png" />
     <Content Include="Content\images\app.webservice.png" />
@@ -258,6 +269,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.filedrop.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -338,6 +350,10 @@
     <Content Include="Views\SolutionApps\Delete.cshtml" />
     <Content Include="Views\Shared\_AddFavorite.cshtml" />
     <Content Include="Views\Favorites\Index.cshtml" />
+    <Content Include="Views\Shared\_FileDrop.cshtml" />
+    <Content Include="Views\Selections\Edit.cshtml" />
+    <Content Include="Views\Selections\SList.cshtml" />
+    <Content Include="Views\Selections\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

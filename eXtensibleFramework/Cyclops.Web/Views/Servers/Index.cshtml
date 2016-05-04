@@ -22,22 +22,27 @@
     d.Add("filter", String.Empty);
 
     string qs = Request.QueryString.ToString();
+
     if (!string.IsNullOrEmpty(qs))
     {
         string[] kvps = qs.Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
         foreach (var kvp in kvps)
         {
             string[] t = kvp.Split(new char[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
-            string key = t[0];
-            string val = t[1];
-            if (key.Equals("sort"))
+            if (t.Count().Equals(2))
             {
-                d["sort"] = String.Format("sort=", val);
+                string key = t[0];
+                string val = t[1];
+                if (key.Equals("sort"))
+                {
+                    d["sort"] = String.Format("sort=", val);
+                }
+                else if (filters.ContainsKey(key))
+                {
+                    d["filter"] = String.Format("{0}={1}", key, val);
+                }
             }
-            else if (filters.ContainsKey(key))
-            {
-                d["filter"] = String.Format("{0}={1}", key, val);
-            }
+
         }
 
     }
@@ -55,13 +60,25 @@
     }
 }
 
-<h2>Index</h2>
+<h2>Servers</h2>
 
-<p>
-    @Html.ActionLink("Add Server", "Create")
 
-</p>
+<div class="row">
+    <div class="col-md-4">
+        @Html.ActionLink("Add Server", "Create")
+    </div>
 
+    <div class="col-md-4">
+        @*<div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">?</span>
+            <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon3">
+        </div>*@
+    </div>
+    <div class="col-md-4">
+
+
+    </div>
+</div>
 
 @if (Model != null)
 {

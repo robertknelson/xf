@@ -131,11 +131,14 @@
                 <dd>
                     @Html.DisplayFor(model => model.Display)
                 </dd>
-
+@if (User.IsInRole("admin"))
+{
                 <dt>
                     <a href="~/serverapps/edit/@Model.ServerAppId?solutionapps=@Model.SolutionId " class="glyphicon glyphicon-pencil" ></a>
                 </dt>
                 <dd></dd>
+}
+
 @if (!String.IsNullOrWhiteSpace(Model.BackUrl))
 {
                 <dt>

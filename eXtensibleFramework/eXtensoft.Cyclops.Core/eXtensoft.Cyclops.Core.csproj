@@ -53,7 +53,9 @@
   <ItemGroup>
     <Compile Include="controller\AppsController.cs" />
     <Compile Include="controller\FavoritesController.cs" />
+    <Compile Include="controller\FileDropController.cs" />
     <Compile Include="controller\FileUploadController.cs" />
+    <Compile Include="controller\SelectionsController.cs" />
     <Compile Include="controller\ServerAppController.cs" />
     <Compile Include="controller\ServerAppsController.cs" />
     <Compile Include="controller\ServersController.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="view.model\ArtifactViewModel.cs" />
     <Compile Include="view.model\ComponentViewModel.cs" />
     <Compile Include="view.model\FavoriteViewModel.cs" />
+    <Compile Include="view.model\SelectionViewModel.cs" />
     <Compile Include="view.model\ServerAppViewModel.cs" />
     <Compile Include="view.model\ServerAppViewModelCollection.cs" />
     <Compile Include="view.model\ServerViewModel.cs" />

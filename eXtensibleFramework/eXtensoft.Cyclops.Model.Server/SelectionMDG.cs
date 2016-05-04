@@ -25,6 +25,7 @@ namespace Cyclops
         private const string SortParamName = "@sort";
         private const string GroupIdParamName = "@groupid";
         private const string MasterIdParamName = "@masterid";
+        private const string IconParamName = "@icon";
 
         #endregion local fields
 
@@ -35,7 +36,8 @@ namespace Cyclops
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
 
-            string sql = "insert into [dbo].[Selection] ( [Display],[Token],[Sort],[GroupId],[MasterId] ) values (" + DisplayParamName + "," + TokenParamName + "," + SortParamName + "," + GroupIdParamName + "," + MasterIdParamName + ")";
+            string sql = "insert into [dbo].[Selection] ( [Display],[Token],[Sort],[GroupId],[MasterId],[Icon] ) values (" + DisplayParamName + 
+                "," + TokenParamName + "," + SortParamName + "," + GroupIdParamName + "," + MasterIdParamName + "," + IconParamName + ")";
 
             cmd.CommandText = sql;
 
@@ -44,6 +46,7 @@ namespace Cyclops
             cmd.Parameters.AddWithValue( SortParamName, model.Sort );
             cmd.Parameters.AddWithValue( GroupIdParamName, model.GroupId );
             cmd.Parameters.AddWithValue( MasterIdParamName, model.MasterId );
+            cmd.Parameters.AddWithValue(IconParamName, !String.IsNullOrEmpty(model.Icon)? (object)model.Icon : DBNull.Value);
 
             return cmd;
         }
@@ -52,17 +55,16 @@ namespace Cyclops
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
 
-            string sql = "update [dbo].[Selection] set [Display] = " + DisplayParamName + " , [Token] = " + TokenParamName + " , [Sort] = " + SortParamName + " , [GroupId] = " + GroupIdParamName + " , [MasterId] = " + MasterIdParamName  + " where [SelectionId] = " + SelectionIdParamName ;
-
-
+            string sql = "update [dbo].[Selection] set [Display] = " + DisplayParamName + " , [Token] = " + TokenParamName + " , [Sort] = " + SortParamName + " , [GroupId] = " + GroupIdParamName + " , [MasterId] = " + MasterIdParamName  + ",[Icon] = " + IconParamName + " where [SelectionId] = " + SelectionIdParamName ;
             cmd.CommandText = sql;
 
-            cmd.Parameters.AddWithValue( DisplayParamName, model.Display );
-            cmd.Parameters.AddWithValue( TokenParamName, model.Token );
-            cmd.Parameters.AddWithValue( SortParamName, model.Sort );
-            cmd.Parameters.AddWithValue( GroupIdParamName, model.GroupId );
-            cmd.Parameters.AddWithValue( MasterIdParamName, model.MasterId );
-
+            cmd.Parameters.AddWithValue(SelectionIdParamName, model.SelectionId);
+            cmd.Parameters.AddWithValue(DisplayParamName, model.Display);
+            cmd.Parameters.AddWithValue(TokenParamName, model.Token);
+            cmd.Parameters.AddWithValue(SortParamName, model.Sort);
+            cmd.Parameters.AddWithValue(GroupIdParamName, model.GroupId);
+            cmd.Parameters.AddWithValue(MasterIdParamName, model.MasterId);
+            cmd.Parameters.AddWithValue(IconParamName, !String.IsNullOrEmpty(model.Icon) ? (object)model.Icon : DBNull.Value);
             return cmd;
         }
         public override SqlCommand DeleteSqlCommand(SqlConnection cn, ICriterion criterion, IContext context)
@@ -83,7 +85,7 @@ namespace Cyclops
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
 
-            string sql = "select [SelectionId], [Display], [Token], [Sort], [GroupId], [MasterId] from [dbo].[Selection] where [SelectionId] = " + SelectionIdParamName ;
+            string sql = "select s.[SelectionId], s.[Display], s.[Token], s.[Sort], s.[GroupId], s.[MasterId],s.[Icon],COALESCE(COALESCE(s.Icon, (select [t].Icon from [dbo].[Selection] as [t] where [t].[SelectionId] = [s].[MasterId])) ,'default.icon.png') as SecondaryIcon from [dbo].[Selection]  as [s] where [s].[SelectionId] = " + SelectionIdParamName ;
 
             cmd.CommandText = sql;
 
@@ -96,7 +98,7 @@ namespace Cyclops
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
 
-            string sql = "select [SelectionId], [Display], [Token], [Sort], [GroupId], [MasterId] from [dbo].[Selection] ";
+            string sql = "select s.[SelectionId], s.[Display], s.[Token], s.[Sort], s.[GroupId], s.[MasterId],s.[Icon],COALESCE(COALESCE(s.Icon, (select [t].Icon from [dbo].[Selection] as [t] where [t].[SelectionId] = [s].[MasterId])) ,'default.icon.png') as SecondaryIcon from [dbo].[Selection]  as [s]";
             cmd.CommandText = sql;
 
             return cmd;
@@ -106,7 +108,7 @@ namespace Cyclops
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
 
-            string sql = "";
+            string sql = "select s.SelectionId as Id,[Display],COALESCE(COALESCE(s.Icon, (select [t].Icon from [dbo].[Selection] as [t] where [t].[SelectionId] = [s].[MasterId])) ,'default.icon.png') as [DisplayAlt], [SelectionId] as IntVal from dbo.Selection as s ";
 
             cmd.CommandText = sql;
 
@@ -119,8 +121,10 @@ namespace Cyclops
 
         public override void BorrowReader(SqlDataReader reader, List<Selection> list)
         {
+
             while (reader.Read())
             {
+               bool hasIcon = reader.FieldExists("SecondaryIcon");
                 var model = new Selection();
                 model.SelectionId = reader.GetInt32(reader.GetOrdinal("SelectionId"));
                 model.Display = reader.GetString(reader.GetOrdinal("Display"));
@@ -133,6 +137,14 @@ namespace Cyclops
                 if (!reader.IsDBNull(reader.GetOrdinal("MasterId")))
                 {
                     model.MasterId = reader.GetInt32(reader.GetOrdinal("MasterId"));
+                }
+                if (!reader.IsDBNull(reader.GetOrdinal("Icon")))
+                {
+                    model.Icon = reader.GetString(reader.GetOrdinal("Icon"));
+                }
+                if (hasIcon && !reader.IsDBNull(reader.GetOrdinal("SecondaryIcon")))
+                {
+                    model.SecondaryIcon = reader.GetString(reader.GetOrdinal("SecondaryIcon"));
                 }
                 list.Add(model);
 

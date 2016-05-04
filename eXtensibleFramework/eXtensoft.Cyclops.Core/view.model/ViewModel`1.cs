@@ -12,7 +12,7 @@ namespace Cyclops.Web
 
         public abstract T ToModel();
 
-        private string _Icon = "model.default.png";
+        private string _Icon = "server.red.png";
         public string Icon
         {
             get { return _Icon; }

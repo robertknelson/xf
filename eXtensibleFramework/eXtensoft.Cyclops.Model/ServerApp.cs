@@ -37,6 +37,7 @@ namespace Cyclops
 
         public string BackupFolderpath { get; set; }
 
+        public string Icon { get; set; }
 
         #region server properties
 

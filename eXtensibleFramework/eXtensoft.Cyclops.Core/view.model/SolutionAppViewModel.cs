@@ -27,6 +27,7 @@ namespace Cyclops.Web
         {
             var apps = SelectionListUtility.GetAppDictionary();
             var solutions = SelectionListUtility.GetSolutionDictionary();
+            var icons = SelectionListUtility.GetSelectionsDictionary();
 
             SolutionAppId = model.SolutionAppId;
             SolutionId = model.SolutionId;
@@ -40,7 +41,10 @@ namespace Cyclops.Web
             {
                 Solution = solutions[model.SolutionId];
             }
-
+            if (icons.ContainsKey(model.AppId))
+            {
+                Icon = icons[model.AppId];
+            }
         }
 
 

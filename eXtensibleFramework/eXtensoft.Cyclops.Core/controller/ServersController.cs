@@ -14,9 +14,13 @@ namespace Cyclops.Controllers
     public class ServersController : ServiceController
     {
         // GET: Server
-        [Authorize(Roles = "member")]
+       
         public ActionResult Index(Nullable<int> id)
         {
+            if (IsSearch())
+            {
+                return Search();
+            }
             if (id != null && id.HasValue)
             {
                 return RedirectToAction("Details", new { id = id.Value });
@@ -42,6 +46,53 @@ namespace Cyclops.Controllers
 
         }
 
+        protected override ActionResult Search()
+        {
+            string key = ResolveSearchKey(SearchInput);
+            var c = Criterion.GenerateStrategy("search");
+            c.AddItem("q", SearchInput);
+            c.AddItem("key", key);
+            var response = Service.GetAll<Server>(c);
+            if (!response.IsOkay)
+            {
+                return View(ErrorViewName, response.Status);
+            }
+            else
+            {
+                var unsorted = from x in response
+                               select new ServerViewModel(x);
+                return View(unsorted);
+            }
+
+        }
+
+
+
+        protected override string ResolveSearchKey(string input)
+        {
+            bool isIP = true;
+            string output = "q";
+            if (!String.IsNullOrWhiteSpace(input))
+            {
+                var t = input.ToCharArray();
+                for (int i = 0;isIP && i < t.Count(); i++)
+                {
+                    Char c = t[i];
+                    isIP = c.Equals('.') || Char.IsDigit(c);
+                }
+                if (isIP)
+                {
+                    output = "IP";
+                }
+                else
+                {
+                    output = "Alpha";
+                }
+            }
+
+
+            return output;
+        }
 
         // GET: Server/Details/5
         [Authorize(Roles = "member")]
@@ -78,6 +129,7 @@ namespace Cyclops.Controllers
         }
 
         // GET: Server/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();

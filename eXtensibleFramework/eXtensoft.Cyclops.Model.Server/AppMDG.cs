@@ -109,7 +109,8 @@ namespace Cyclops
             SqlCommand cmd = cn.CreateCommand();
             cmd.CommandType = CommandType.Text;
 
-            string sql = "";
+            string sql = "Select [a].[AppId] as [Id], [a].[Name] as [Display], COALESCE([s].[Icon] ,select Icon from [dbo].[selections] where [SelectionId] = [s].MasterId)as [DisplayAlt], [a].[AppId] as [IntVal] from [dbo].[App] as [a] inner join [dbo].[Selection] as [s] on " +
+                "[a].[AppTypeId] = [s].[SelectionId]";
 
             cmd.CommandText = sql;
 

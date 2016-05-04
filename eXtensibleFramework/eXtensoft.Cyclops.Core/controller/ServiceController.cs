@@ -10,7 +10,7 @@ namespace Cyclops.Controllers
     using System.Web.Mvc;
     using XF.Common;
 
-    //[Authorize(Roles="guest,member,admin")]
+    [Authorize(Roles = "guest,member")]
     public abstract class ServiceController : Controller
     {
         public virtual string ErrorViewName { get { return "Error"; } }
@@ -32,6 +32,39 @@ namespace Cyclops.Controllers
             {
                 _Service = value;
             }
+        }
+
+        public string SearchInput { get; set; }
+
+        public string SearchKey { get; set; }
+
+        protected bool IsSearch()
+        {
+            bool b = false;
+            string qs = Request.QueryString.ToString();
+            if (!string.IsNullOrEmpty(qs))
+            {
+                string[] kvps = qs.Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0;!b && i < kvps.Count(); i++)
+                {
+                    string[] t = kvps[i].Split(new char[] { '='});
+
+                    b = t[0].Equals("q") && !String.IsNullOrWhiteSpace(t[1]);
+                    SearchInput = t[1];
+                    SearchKey = ResolveSearchKey(t[1]);
+                }
+            }
+                return b;
+        }
+
+        protected virtual string ResolveSearchKey(string input)
+        {
+            return "q";
+        }
+
+        protected virtual ActionResult Search()
+        {
+            return View(ErrorViewName);
         }
 
         protected ICriterion GetParameters(HttpRequestBase request)

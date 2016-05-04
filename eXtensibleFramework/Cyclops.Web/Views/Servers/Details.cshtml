@@ -111,14 +111,13 @@
 
             }
 
-            @if (!String.IsNullOrWhiteSpace(Model.BackUrl))
-            {
-
-                <dt>
-                    <a href = "~/@Model.BackUrl" class="glyphicon glyphicon-alert"></a>
-                </dt>
+@if (!String.IsNullOrWhiteSpace(Model.BackUrl))
+{
+    <dt>
+        <a href="~/@Model.BackUrl" class="glyphicon glyphicon-alert"></a>
+    </dt>
                 <dd></dd>
-            }
+}
         </dl>
         <p><a href="~/servers" class="glyphicon glyphicon-list"></a></p>      
     </div>

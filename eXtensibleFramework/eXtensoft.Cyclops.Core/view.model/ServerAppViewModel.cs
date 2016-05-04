@@ -81,6 +81,7 @@ namespace Cyclops.Web
             var favServerApps = SelectionListUtility.GetFavorites(name, "serverapp");
             var favServers = SelectionListUtility.GetFavorites(name, "server");
             var favApps = SelectionListUtility.GetFavorites(name, "app");
+            var icons = SelectionListUtility.GetSelectionsDictionary();
             ServerAppId = model.ServerAppId;
             var found = favServerApps.Find(x => x.ModelId.Equals(model.ServerAppId));
             if (found != null)
@@ -97,7 +98,10 @@ namespace Cyclops.Web
             {
                 IsAppFavorite = true;
             }
-
+            if (icons.ContainsKey(model.AppId))
+            {
+                Icon = icons[model.AppId];
+            }
             var servers = SelectionListUtility.GetServerDictionary();
             var apps = SelectionListUtility.GetAppDictionary();
             var zones = SelectionListUtility.GetZoneDictionary();

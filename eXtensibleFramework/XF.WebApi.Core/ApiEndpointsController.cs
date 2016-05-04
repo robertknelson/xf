@@ -11,8 +11,8 @@ namespace XF.WebApi.Core
     {
         public ActionResult Index()
         {
-
-            return View();
+            //WebApiRegistrar.EndpointManager.Endpoints
+            return View(WebApiRegistrar.EndpointManager.Endpoints);
         }
     }
 }

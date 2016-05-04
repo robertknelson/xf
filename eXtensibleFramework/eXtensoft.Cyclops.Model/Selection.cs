@@ -31,6 +31,10 @@ namespace Cyclops
 
         public int MasterId { get; set; }
 
+        public string Icon { get; set; }
+
+        public string SecondaryIcon { get; set; }
+
         #endregion properties
 
         #region constructors

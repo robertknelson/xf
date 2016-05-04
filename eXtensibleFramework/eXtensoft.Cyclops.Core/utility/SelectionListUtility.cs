@@ -328,6 +328,37 @@ namespace Cyclops
             return d;
         }
 
+        public static Dictionary<int,string> GetAppIconDictionary()
+        {
+            var c = Criterion.GenerateStrategy("app.icon");
+            var service = GetService();
+            var response = service.GetAllProjections<App>(c);
+            Dictionary<int, string> d = new Dictionary<int, string>();
+            foreach (var item in response.Display)
+            {
+                if (!String.IsNullOrWhiteSpace(item.DisplayAlt))
+                {
+                    d.Add(item.IntVal, item.DisplayAlt);
+                }                
+            }
+            return d;
+        }
+
+        public static Dictionary<int,string> GetSelectionsDictionary()
+        {
+            var service = GetService();
+            var response = service.GetAllProjections<Selection>(null);
+            Dictionary<int, string> d = new Dictionary<int, string>();
+            foreach (var item in response.Display)
+            {
+                if (!String.IsNullOrWhiteSpace(item.DisplayAlt))
+                {
+                    d.Add(item.IntVal, item.DisplayAlt);
+                }
+            }
+            return d;
+        }
+
         public static Dictionary<string, int> GetReverseAppDictionary()
         {
             var service = GetService();

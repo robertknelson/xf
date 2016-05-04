@@ -60,6 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContactController.cs" />
+    <Compile Include="SnippetController.cs" />
     <Compile Include="ToDoController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

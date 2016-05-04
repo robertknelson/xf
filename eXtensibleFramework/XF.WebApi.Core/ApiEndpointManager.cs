@@ -55,36 +55,40 @@ namespace XF.WebApi.Core
         {
            _IsInitialized = Controllers != null && Controllers.Count() > 0;
 
-            string filepath = HostingEnvironment.MapPath("~/app_data/api.endpoints.xml");
+            List<Endpoint> list = new List<Endpoint>();
+            int i = 1;
+            foreach (var endpoint in this)
+            {
+                var item = new Endpoint()
+                {
+                    SortOrder = i++,
+                    Id = endpoint.Id.ToString(),
+                    Name = endpoint.Name,
+                    Description = endpoint.Description,
+                    RoutePattern = endpoint.RouteTablePattern,
+                    WhitelistPattern = endpoint.WhitelistPattern,
+                    Version = endpoint.Version
+                };
+                list.Add(item);
+            }
+             string filepath = HostingEnvironment.MapPath("~/app_data/api.endpoints.xml");
             FileInfo info = new FileInfo(filepath);
             if (!info.Exists)
             {
-                List<Endpoint> list = new List<Endpoint>();
-                int i = 1;
-                foreach (var endpoint in this)
-                {
-                    var item = new Endpoint()
-                    {
-                        SortOrder = i++,
-                        Id = endpoint.Id.ToString(),
-                        Name = endpoint.Name,
-                        Description = endpoint.Description,
-                        RoutePattern = endpoint.RouteTablePattern,
-                        WhitelistPattern = endpoint.WhitelistPattern,
-                        Version = endpoint.Version
-                    };
-                    list.Add(item);
-                }
+
                 GenericSerializer.WriteGenericList<Endpoint>(list, info.FullName);
+                _Endpoints = list;
             }
             else
             {
+            // IF endpoints came from existing, then order
                 List<Endpoint> endpoints = GenericSerializer.ReadGenericList<Endpoint>(info.FullName);
+                    _Endpoints = list;
             }
 
 
 
-            // IF endpoints came from existing, then order
+
 
             return _IsInitialized;
         }
