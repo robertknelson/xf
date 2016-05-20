@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lob", "lob", "{2BB537CA-25C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Technology.Api", "..\demo\Company.Technology.Api\Company.Technology.Api.csproj", "{E1034CC1-2AE6-4FB1-8C3E-EBFF8085005C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "windows", "windows", "{302C8A8F-18D9-49D1-B973-454E9FE55923}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

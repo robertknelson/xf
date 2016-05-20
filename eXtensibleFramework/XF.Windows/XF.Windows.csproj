@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{50A0C2FA-C28F-4CFF-8B81-F9B1649A0D84}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XF.Windows</RootNamespace>
+    <AssemblyName>XF.Windows</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="calendar\BlockMinuteOption.cs" />
+    <Compile Include="calendar\DaysInWeek.cs" />
+    <Compile Include="calendar\IntervalTypeOption.cs" />
+    <Compile Include="calendar\MajorTimeBlock.cs" />
+    <Compile Include="calendar\MinorTimeBlock.cs" />
+    <Compile Include="calendar\ScheduleDay.cs" />
+    <Compile Include="calendar\ScheduleFactory.cs" />
+    <Compile Include="calendar\ScheduleSettings.cs" />
+    <Compile Include="calendar\VisibilityTypeOption.cs" />
+    <Compile Include="calendar\WeeksInMonth.cs" />
+    <Compile Include="calendar\WeekViewTypeOption.cs" />
+    <Compile Include="command\AsyncCommandBase.cs" />
+    <Compile Include="command\RelayCommand.cs" />
+    <Compile Include="command\RelayCommandAsyncT.cs" />
+    <Compile Include="command\RelayCommandT.cs" />
+    <Compile Include="converter\BooleanToBrushConverter.cs" />
+    <Compile Include="converter\HasValueVisibilityConverter.cs" />
+    <Compile Include="converter\ImageMapConverter.cs" />
+    <Compile Include="converter\ProjectionCacheConverter.cs" />
+    <Compile Include="converter\StringFormatConverter.cs" />
+    <Compile Include="converter\StringToPrimitiveConverter.cs" />
+    <Compile Include="converter\UriToBitmapConverter.cs" />
+    <Compile Include="converter\UrlConverter.cs" />
+    <Compile Include="converter\VisibilityToStarConverter.cs" />
+    <Compile Include="filesystem\FileLoaderEventArgs.cs" />
+    <Compile Include="filesystem\FileSystemLoader`1.cs" />
+    <Compile Include="filesystem\XamlSystemFileLoader`1.cs" />
+    <Compile Include="filtering\CustomFilterGroup.cs" />
+    <Compile Include="filtering\FilterGroup.cs" />
+    <Compile Include="filtering\FilterItem.cs" />
+    <Compile Include="filtering\FilterProvider.cs" />
+    <Compile Include="filtering\IFilterResolver.cs" />
+    <Compile Include="filtering\PropertyFilterGroup.cs" />
+    <Compile Include="finite.state.machine\ActivityStateOption.cs" />
+    <Compile Include="finite.state.machine\EndpointAction.cs" />
+    <Compile Include="finite.state.machine\EndpointOption.cs" />
+    <Compile Include="finite.state.machine\IEndpointAction.cs" />
+    <Compile Include="finite.state.machine\ITransitionCondition.cs" />
+    <Compile Include="finite.state.machine\State.cs" />
+    <Compile Include="finite.state.machine\StateMachine.cs" />
+    <Compile Include="finite.state.machine\StateMachineDirector.cs" />
+    <Compile Include="finite.state.machine\StateMachineTypeOption.cs" />
+    <Compile Include="finite.state.machine\StateManager.cs" />
+    <Compile Include="finite.state.machine\Transition.cs" />
+    <Compile Include="finite.state.machine\TransitionCondition.cs" />
+    <Compile Include="finite.state.machine\TransitionTypeOption.cs" />
+    <Compile Include="general\ConfigValueProvider.cs" />
+    <Compile Include="general\EventsBroker.cs" />
+    <Compile Include="general\EventService.cs" />
+    <Compile Include="general\EventSubscriber.cs" />
+    <Compile Include="general\GenericEventHandler.cs" />
+    <Compile Include="general\MinimizeToTray.cs" />
+    <Compile Include="general\OverlayManager.cs" />
+    <Compile Include="general\ShellConfiguration.cs" />
+    <Compile Include="general\SortableObservableCollection`2.cs" />
+    <Compile Include="general\XUXConstants.cs" />
+    <Compile Include="general\XUXExtensionMethods.cs" />
+    <Compile Include="model.repository\IModelRepository.cs" />
+    <Compile Include="model.repository\IViewModelFactory.cs" />
+    <Compile Include="model.repository\ModelRepository%272.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="read.through\ProjectionDataProvider.cs" />
+    <Compile Include="read.through\ProjectionObjectDataProvider.cs" />
+    <Compile Include="read.through\ProjectionReadThroughCache.cs" />
+    <Compile Include="template.selector\MappedTemplateSelector.cs" />
+    <Compile Include="view.model\GroupingViewModel.cs" />
+    <Compile Include="view.model\HierarchicalViewModel`1.cs" />
+    <Compile Include="view.model\IHierarchicalViewModel.cs" />
+    <Compile Include="view.model\IViewModel.cs" />
+    <Compile Include="view.model\PropertyValidator.cs" />
+    <Compile Include="view.model\PropertyValidatorCollection.cs" />
+    <Compile Include="view.model\SortableViewModel`1.cs" />
+    <Compile Include="view.model\ViewModel`1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="view\layout\" />
+    <Folder Include="view\state.management\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="theme\DataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="theme\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="theme\TabItemResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XF.Common.Contracts\XF.Common.Contracts.csproj">
+      <Project>{2f5cb864-edc3-41c2-a477-a6dbbdb62487}</Project>
+      <Name>XF.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XF.Common\XF.Common.csproj">
+      <Project>{18dff16a-8f34-4393-a15b-6abdbedb97f4}</Project>
+      <Name>XF.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StateMachine xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" beginState="LoggedOff" endState="LoggedOff">
+  <State name="LoggedOff" display="LoggedOff" />
+  <State name="Authenticated" display="Authenticated" />
+  <State name="Authorized" display="Authorized" />
+  <State name="Unauthorized" display="Unauthorized" />
+  <State name="Error" display="Error" />
+  <Transition name="Login" display="" origin="LoggedOff" destination="Authenticated" order="0" />
+  <Transition name="UnAuthorize" display="" origin="Authenticated" destination="Unauthorized" order="0" />
+  <Transition name="Authorize" display="" origin="Authenticated" destination="Authorized" order="0" />
+  <Transition name="Logoff" display="" origin="Authorized" destination="LoggedOff" order="0" />
+  <Transition name="Logoff" display="" origin="Authenticated" destination="LoggedOff" order="0" />
+  <Transition name="Logoff" display="" origin="Unauthorized" destination="LoggedOff" order="0" />
+  <Transition name="OnError" display="" origin="Authenticated" destination="Error" order="0" />
+  <Transition name="OnError" display="" origin="Authorized" destination="Error" order="0" />
+  <Transition name="Logoff" display="" origin="Error" destination="LoggedOff" order="0" />
+</StateMachine>

@@ -73,6 +73,7 @@
     <Compile Include="common\event.writer\XFToolWriter.cs" />
     <Compile Include="common\ExtensionMethods.cs" />
     <Compile Include="common\NetMemoryCache.cs" />
+    <Compile Include="common\UserData.cs" />
     <Compile Include="common\WindowsIdentityProvider.cs" />
     <Compile Include="common\XFConstants.cs" />
     <Compile Include="configuration\eXtensibleConfig.cs" />

@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:xux="clr-namespace:XF.Windows.Common;assembly=XF.Windows"
+                    xmlns:local="clr-namespace:Arges">
+
+
+
+
+
+
+    <DataTemplate x:Key="ServerDataTemplate">
+        <local:ServerView/>
+    </DataTemplate>
+
+
+    <HierarchicalDataTemplate DataType="{x:Type xux:GroupingViewModel}" ItemsSource="{Binding Path=Items}">
+        <StackPanel Orientation="Horizontal">
+            <Image Margin="0,2,4,2" Height="20" Width="20" Source="../images/folder_blue_2.png"/>
+            <TextBlock Text="{Binding Path=Title}" VerticalAlignment="Center"/>
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <HierarchicalDataTemplate DataType="{x:Type local:ServerViewModel}">
+        <StackPanel Orientation="Horizontal">
+           
+            <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+
+
+
+</ResourceDictionary>

@@ -248,6 +248,7 @@
     <Content Include="Content\images\server.grey.png" />
     <Content Include="Content\images\server.red.png" />
     <Content Include="favicon.ico" />
+    <Content Include="GenericService.svc" />
     <Content Include="Global.asax" />
     <Content Include="Content\themes\light\Site.css" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
