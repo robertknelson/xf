@@ -9,7 +9,7 @@
         Loaded="Window_Loaded" Closing="Window_Closing"
         WindowStartupLocation="CenterScreen" 
         WindowStyle="ToolWindow"
-        Title="Shell" Height="300" Width="300">
+        Title="Shell" Height="500" Width="900">
     <Grid x:Name="LayoutRoot" Background="Black">
         
     </Grid>

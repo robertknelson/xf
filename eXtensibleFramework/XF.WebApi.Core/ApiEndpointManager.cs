@@ -18,12 +18,14 @@ namespace XF.WebApi.Core
     {
         #region local members
         private bool _IsInitialized = false;
-        private List<IEndpointController> _OrderedControllers = null;
+        private List<IEndpointController> _OrderedControllers = new List<IEndpointController>();
         #endregion
 
         #region properties
         [ImportMany(typeof(IEndpointController))]
         public List<IEndpointController> Controllers { get; set; }
+
+        public bool IsDirty { get; set; }
 
         private List<Endpoint> _Endpoints = null;
         public IEnumerable<Endpoint> Endpoints
@@ -54,43 +56,84 @@ namespace XF.WebApi.Core
         public bool Initialize()
         {
            _IsInitialized = Controllers != null && Controllers.Count() > 0;
-
-            List<Endpoint> list = new List<Endpoint>();
             int i = 1;
-            foreach (var endpoint in this)
+            if (_IsInitialized)
             {
-                var item = new Endpoint()
-                {
-                    SortOrder = i++,
-                    Id = endpoint.Id.ToString(),
-                    Name = endpoint.Name,
-                    Description = endpoint.Description,
-                    RoutePattern = endpoint.RouteTablePattern,
-                    WhitelistPattern = endpoint.WhitelistPattern,
-                    Version = endpoint.Version
-                };
-                list.Add(item);
-            }
-             string filepath = HostingEnvironment.MapPath("~/app_data/api.endpoints.xml");
-            FileInfo info = new FileInfo(filepath);
-            if (!info.Exists)
-            {
+                List<Endpoint> list = new List<Endpoint>();
 
-                GenericSerializer.WriteGenericList<Endpoint>(list, info.FullName);
+                 string filepath = HostingEnvironment.MapPath("~/app_data/api.endpoints.xml");
+                FileInfo info = new FileInfo(filepath);
+                if (!info.Exists)
+                {
+                    foreach (var endpoint in this)
+                    {
+                        var item = new Endpoint()
+                        {
+                            SortOrder = i++,
+                            Id = endpoint.Id.ToString(),
+                            Name = endpoint.Name,
+                            Description = endpoint.Description,
+                            RoutePattern = endpoint.RouteTablePattern,
+                            WhitelistPattern = endpoint.WhitelistPattern,
+                            Version = endpoint.Version
+                        };
+                        list.Add(item);
+                    }
+
+                    GenericSerializer.WriteGenericList<Endpoint>(list, info.FullName);
+                }
+                else
+                {
+                    // IF endpoints came from existing, then order
+                    List<Guid> burned = new List<Guid>();
+                    List<Endpoint> endpoints = GenericSerializer.ReadGenericList<Endpoint>(info.FullName);
+                    foreach (Endpoint orderedEndpoint in endpoints)
+                    {
+                        Guid g = new Guid(orderedEndpoint.Id);
+                        var found = Controllers.Find(x => x.Id.Equals(g));
+                        if (found != null)
+                        {
+                            burned.Add(g);
+                            _OrderedControllers.Add(found);
+                        }
+                    }
+                    foreach (var controller in Controllers)
+                    {
+                        if (!burned.Contains(controller.Id))
+                        {
+                            _OrderedControllers.Add(controller);
+                        }
+                    }
+                    foreach (var endpoint in _OrderedControllers)
+                    {
+                        var item = new Endpoint()
+                        {
+                            SortOrder = i++,
+                            Id = endpoint.Id.ToString(),
+                            Name = endpoint.Name,
+                            Description = endpoint.Description,
+                            RoutePattern = endpoint.RouteTablePattern,
+                            WhitelistPattern = endpoint.WhitelistPattern,
+                            Version = endpoint.Version
+                        };
+                        list.Add(item);
+                    }
+                    GenericSerializer.WriteGenericList<Endpoint>(list, info.FullName);
+                }
+
                 _Endpoints = list;
             }
-            else
+            return _IsInitialized;
+        }
+
+        public void SaveChanges() {
+            if (IsDirty)
             {
-            // IF endpoints came from existing, then order
-                List<Endpoint> endpoints = GenericSerializer.ReadGenericList<Endpoint>(info.FullName);
-                    _Endpoints = list;
+                string filepath = HostingEnvironment.MapPath("~/app_data/api.endpoints.xml");
+                GenericSerializer.WriteGenericList<Endpoint>(_Endpoints, filepath);
+                IsDirty = false;
             }
 
-
-
-
-
-            return _IsInitialized;
         }
 
         IEnumerator<IEndpointController> IEnumerable<IEndpointController>.GetEnumerator()
@@ -98,6 +141,13 @@ namespace XF.WebApi.Core
             if (!_IsInitialized)
             {
                 yield return null;
+            }
+            else if (_OrderedControllers != null)
+            {
+                foreach (IEndpointController controller in _OrderedControllers)
+                {
+                    yield return controller;
+                }
             }
             else
             {
@@ -112,6 +162,37 @@ namespace XF.WebApi.Core
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        public void Swap(Guid xId, Guid yId)
+        {
+            Endpoint xEndpoint = null;
+            Endpoint yEndpoint = null;
+
+            string xid = xId.ToString();
+            string yid = yId.ToString();
+            List<Endpoint> list = new List<Endpoint>();
+            foreach (var endpoint in Endpoints)
+            {
+                if (!endpoint.Id.Equals(xid) && !endpoint.Id.Equals(yid))
+                {
+                    Endpoint item = endpoint;
+                    list.Add(item);
+                }
+                else if(endpoint.Id.Equals(xid))
+                {
+                    Endpoint item = endpoint;
+                    xEndpoint = item;
+                }
+                else if(endpoint.Id.Equals(yid))
+                {
+                    yEndpoint = endpoint;
+                    list.Add(yEndpoint);
+                    list.Add(xEndpoint);
+                    IsDirty = true;
+                }
+            }
+            _Endpoints = list;
         }
     }
 

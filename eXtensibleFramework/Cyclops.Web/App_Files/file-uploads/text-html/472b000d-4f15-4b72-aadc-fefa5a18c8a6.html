@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Previews</title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="styles/bootstrap-3.3.6/css/bootstrap.css" />
+    <script type="text/javascript" src="scripts/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="styles/bootstrap-3.3.6/js/bootstrap.js"></script>
+    <script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="panel">
+                <div class="row">
+                    <span data-container="body" data-toggle="popover" data-placement="right" data-content="fractal"
+                          data-template="<img src='resources/dragon-fractal-on-black-background.jpg'>" data-trigger="hover focus">
+                        Fractal
+                    </span>
+                </div>
+                <div class="row">
+                    <span data-container="body" data-toggle="popover" data-placement="right" data-content="doom"
+                          data-template="<img src='resources/963.jpg'>" data-trigger="hover focus">
+                        Doom
+                    </span>
+                </div>
+                <div class="row">
+                    <span data-container="body" data-toggle="popover" data-placement="right" data-content="doom"
+                          data-template="<img src='resources/laughing-man.gif'>" data-trigger="hover focus">Laughing Man</span>
+                </div>
+                <div class="row">
+                    <span data-container="body" data-toggle="popover" data-placement="right" data-content="text"
+                          data-template="<div class='panel'><div class='well well-sm'><p>eventcreate /ID 1 /L APPLICATION /T INFORMATION /SO eXtensoft.Log /D 'Test Log'</p></div></div>" data-trigger="hover focus">My Text</span>
+                </div>
+                <div class="row">
+                    <span data-container="body" data-toggle="popover" data-placement="bottom" data-content="text" data-trigger="hover focus"
+                          data-template="<iframe src='resources/CountryList.txt'></iframe>">
+                        Countries
+                    </span>
+                </div>
+        </div>
+    </div>
+
+</body>
+</html>

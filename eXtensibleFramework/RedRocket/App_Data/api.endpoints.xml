@@ -1,8 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEndpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
- <Endpoint sortOrder="1" version="1" id="cad93d07-16df-4465-a800-5ff8c3471e5f" name="Company ToDo Endpoint">
+ <Endpoint sortOrder="1" version="1" id="8e5d5487-e36a-4e51-821a-6806d2474958" name="Company Snippets Endpoint">
+  <Whitelist />
+  <Pattern>v{version}/snippets</Pattern>
+  <Description>This endpoint provides REST API functionality for Snippets</Description>
+ </Endpoint>
+ <Endpoint sortOrder="2" version="1" id="bbdddca5-da77-40c3-affe-694227f80e73" name="Company Contact Endpoint">
+  <Whitelist />
+  <Pattern>v{version}/contacts</Pattern>
+  <Description>This endpoint provides REST API functionality for Contacts</Description>
+ </Endpoint>
+ <Endpoint sortOrder="3" version="1" id="cad93d07-16df-4465-a800-5ff8c3471e5f" name="Company ToDo Endpoint">
   <Whitelist />
   <Pattern>v{version}/todos</Pattern>
   <Description>This endpoint provides REST API functionality for ToDo items</Description>
+ </Endpoint>
+ <Endpoint sortOrder="4" version="1" id="2c526773-a6fa-4199-be1f-8c775beb98ad" name="Conflict Endpoint">
+  <Whitelist />
+  <Pattern>v{version}/todos</Pattern>
+  <Description>This endpoint provides REST API functionality for Something</Description>
  </Endpoint>
 </ArrayOfEndpoint>

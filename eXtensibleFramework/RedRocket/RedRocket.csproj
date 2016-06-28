@@ -246,6 +246,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\ApiEndpoints\Index.cshtml" />
+    <Content Include="Views\ApiEndpoints\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\demo\Company.Technology.Api\Company.Technology.Api.csproj">

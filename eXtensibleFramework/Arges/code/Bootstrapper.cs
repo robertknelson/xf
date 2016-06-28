@@ -7,8 +7,6 @@ namespace Arges
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Text;
     using System.Windows;
     using XF.Common;
     using XF.Windows.Common;
@@ -34,7 +32,10 @@ namespace Arges
             if (response.IsOkay)
             {
                 Workspace w = new Workspace(response);
+                var creds = System.Windows.Application.Current.Properties[AppConstants.UserCredentialsViewModel] as UserCredentialsViewModel;
+                WorkspaceViewModel vm = new WorkspaceViewModel(w) {  Service = svc, Credentials = creds};
                 Application.Current.Properties[AppConstants.Workspace] = w;
+                System.Windows.Application.Current.Properties[AppConstants.WorkspaceViewModel] = vm;
             }
         }
 
@@ -45,7 +46,8 @@ namespace Arges
             {
                 found = new UserCredentials() { Credentials = new List<ServerCredentials>(), Display = Environment.UserName, LastUpdatedAt = DateTime.Now };
                 List<WindowsServer> ls = new List<WindowsServer>();
-                ls.Add(new WindowsServer() { Name = "ServerName", Token = "server-name", ExternalIP = "192.0.0.101" });
+                var ws = new WindowsServer() {  GroupName = "grpName", Master = "master", ServerId = 6, ExternalIP = "162.209.16.190" , };
+                ls.Add(ws);
                 found.Credentials.Add(new ServerCredentials() { Credential = new WindowsCredential() { Name = "MyDomain", Domain = Environment.UserDomainName, Username = Environment.UserName, Password = "pass@word!", Id = Guid.NewGuid() }, Servers = ls });
 
                 UserData.Write<UserCredentials>(found, true);

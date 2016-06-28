@@ -111,8 +111,11 @@ namespace Cyclops
             else
             {
 
-                sql = "select [ArtifactId], [Id], [ArtifactTypeId], [Mime], [ContentLength], [OriginalFilename], [Location], [Title],[Tds] from [dbo].[Artifact] where [ArtifactId] = " + ArtifactIdParamName;
-
+                //sql = "select [ArtifactId], [Id], [ArtifactTypeId], [Mime], [ContentLength], [OriginalFilename], [Location], [Title],[Tds] from [dbo].[Artifact] where [ArtifactId] = " + ArtifactIdParamName;
+                sql = "select a.[ArtifactId], a.[Id], a.[ArtifactTypeId], a.[Mime], a.[ContentLength], a.[OriginalFilename],a.[Location], a.[Title], a.[Tds],d.[DocumentId]," +
+                "d.[ArtifactScopeTypeId],d.[ArtifactScopeId] from [dbo].[Artifact] as a INNER JOIN [dbo].[Documentation] as d ON a.[ArtifactId] = d.[ArtifactId] " +
+                "where a.[ArtifactId] =  " + ArtifactIdParamName;
+                //cmd.Parameters.AddWithValue(ArtifactIdParamName, criterion.GetValue<int>("ArtifactIdId"));
             }
 
             cmd.CommandText = sql;
@@ -134,6 +137,12 @@ namespace Cyclops
                 cmd.CommandText = sql;
                 cmd.Parameters.AddWithValue(ArtifactScopeTypeIdParamName, criterion.GetValue<int>("ScopeTypeId"));
                 cmd.Parameters.AddWithValue(ArtifactScopeIdParamName, criterion.GetValue<int>("ScopeId"));
+            }
+            else
+            {
+                string sql = "select a.[ArtifactId], a.[Id], a.[ArtifactTypeId], a.[Mime], a.[ContentLength], a.[OriginalFilename],a.[Location], a.[Title], a.[Tds],d.[DocumentId]," +
+                    "d.[ArtifactScopeTypeId],d.[ArtifactScopeId] from [dbo].[Artifact] as a INNER JOIN [dbo].[Documentation] as d ON a.[ArtifactId] = d.[ArtifactId] ";
+                cmd.CommandText = sql;
             }
             return cmd;
         }

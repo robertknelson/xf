@@ -4,10 +4,8 @@
 
 namespace Arges
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Windows;
     public static class CredentialsManager
     {
@@ -21,6 +19,25 @@ namespace Arges
             {
                 ServerCredentials cred = userCredentials.Credentials[i];
                 var found = cred.Servers.FirstOrDefault(x => x.ExternalIP.Equals(externalIP));
+                if (found != null)
+                {
+                    item = cred.Credential;
+                    b = true;
+                }
+            }
+            return item;
+        }
+
+        public static WindowsCredential ResolveCredentials(int serverId )
+        {
+            WindowsCredential item = null;
+            UserCredentials userCredentials = GetUserCredentials();
+            bool b = false;
+
+            for (int i = 0; !b && i < userCredentials.Credentials.Count; i++)
+            {
+                ServerCredentials cred = userCredentials.Credentials[i];
+                var found = cred.Servers.FirstOrDefault(x => x.ServerId.Equals(serverId));
                 if (found != null)
                 {
                     item = cred.Credential;

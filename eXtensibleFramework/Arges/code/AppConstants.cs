@@ -4,11 +4,6 @@
 
 namespace Arges
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     public static class AppConstants
     {
         public const string ModuleManager = "module.manager";
@@ -23,6 +18,7 @@ namespace Arges
         public const string UserCredentials = "user.credentials";
         public const string UserCredentialsViewModel = "user.credentials.viewmodel";
         public const string Workspace = "solution.workspace";
+        public const string WorkspaceViewModel = "solution.workspace.viewmodel";
         public static class Settings
         {
             public const string CurrentDirectory = "current.directory";

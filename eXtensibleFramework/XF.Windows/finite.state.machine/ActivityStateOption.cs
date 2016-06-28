@@ -11,6 +11,7 @@ namespace XF.Windows.Common
         Authorized,
         Unauthorized,
         Error,
-        Settings
+        Settings,
+        Credentials,
     }
 }

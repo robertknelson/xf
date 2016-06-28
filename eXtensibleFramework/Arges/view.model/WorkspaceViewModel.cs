@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using XF.Common;
 using XF.Windows.Common;
@@ -12,32 +9,9 @@ namespace Arges
 {
     public class WorkspaceViewModel : ViewModel<Workspace>
     {
+        public UserCredentialsViewModel Credentials { get; set; }
 
         public IModelRequestService Service { get; set; }
-
-
-        #region MasterView (MasterViewOption)
-
-
-        /// <summary>
-        /// Gets or sets the MasterViewOption value for MasterView
-        /// </summary>
-        /// <value> The MasterViewOption value.</value>
-        private MasterViewOption _MasterView;
-        public MasterViewOption MasterView
-        {
-            get { return _MasterView; }
-            set
-            {
-                if (_MasterView != value)
-                {
-                    _MasterView = value;
-                    OnPropertyChanged("MasterView");
-                }
-            }
-        }
-
-        #endregion
 
         #region Groupings (ObservableCollection<GroupingViewModel>)
 
@@ -57,6 +31,54 @@ namespace Arges
                 {
                     _Groupings = value;
                     OnPropertyChanged("Groupings");
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region SelectedItem (ServerViewModel)
+
+        private ServerViewModel _SelectedItem;
+
+        /// <summary>
+        /// Gets or sets the ServerViewModel value for SelectedItem
+        /// </summary>
+        /// <value> The ServerViewModel value.</value>
+
+        public ServerViewModel SelectedItem
+        {
+            get { return _SelectedItem; }
+            set
+            {
+                if (_SelectedItem != value)
+                {
+                    _SelectedItem = value;
+                    OnPropertyChanged("SelectedItem");
+                }
+            }
+        }
+
+        #endregion
+
+        #region ListView (ObservableCollection<ServerViewModel>)
+
+        private ObservableCollection<ServerViewModel> _ListView = new ObservableCollection<ServerViewModel>();
+
+        /// <summary>
+        /// Gets or sets the ObservableCollection<ServerViewModel> value for ListView
+        /// </summary>
+        /// <value> The ObservableCollection<ServerViewModel> value.</value>
+
+        public ObservableCollection<ServerViewModel> ListView
+        {
+            get { return _ListView; }
+            set
+            {
+                if (_ListView != value)
+                {
+                    _ListView = value;
                 }
             }
         }
@@ -92,14 +114,14 @@ namespace Arges
 
         private void HandleGetAllServers(IEnumerable<Cyclops.Server> list)
         {
-
-            var grp = new ServerGroupingViewModel("Servers",
-                (from x in list select new ServerViewModel(x) {
+            List<ServerViewModel> servers = (from x in list select new ServerViewModel(x) {
                     OperatingSystem = Model.Converter.Convert(x.OperatingSystemId),
                     HostPlatform = Model.Converter.Convert(x.HostPlatformId),
                     Security = Model.Converter.Convert(x.SecurityId)
-                }).ToList());
-            Groupings.Add(grp);
+            }).ToList();
+
+            Groupings.Add(new ServerGroupingViewModel("Servers", servers));
+            ListView = new ObservableCollection<ServerViewModel>(servers);
 
         }
 

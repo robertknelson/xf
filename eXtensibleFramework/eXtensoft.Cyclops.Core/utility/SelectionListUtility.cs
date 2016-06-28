@@ -190,6 +190,13 @@ namespace Cyclops
                     }).ToList();
         }
 
+        public static List<ArtifactViewModel> GetArtifacts()
+        {
+            var service = GetService();
+            var response = service.GetAll<Artifact>(null);
+            return (from x in response select new ArtifactViewModel(x)).ToList();
+        }
+
 
         public static List<SelectListItem> GetApps()
         {

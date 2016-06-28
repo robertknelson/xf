@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using XF.Windows.Common;
 
 namespace Arges
@@ -25,6 +16,21 @@ namespace Arges
         //public UserControl MainView { get; set; }
         public Func<UserControl> GetMainView { get; set; }
 
+        private UserCredentialsView _Credentials;
+        protected UserCredentialsView Credentials
+        {
+            get
+            {
+                if (_Credentials == null)
+                {
+                    WorkspaceViewModel vm = Application.Current.Properties[AppConstants.WorkspaceViewModel] as WorkspaceViewModel;
+                    _Credentials = new UserCredentialsView() { DataContext = vm.Credentials };
+                }
+                return _Credentials;
+            }
+        }
+
+
         public Shell()
         {
             InitializeComponent();
@@ -34,7 +40,42 @@ namespace Arges
             _StateManager.RegisterEndpointAction(ActivityStateOption.LoggedOff.ToString(), EndpointOption.Arrival, OnLoggedOff);
             _StateManager.RegisterEndpointAction(ActivityStateOption.Unauthorized.ToString(), EndpointOption.Arrival, OnUnauthorized);
             _StateManager.RegisterEndpointAction(ActivityStateOption.Error.ToString(), EndpointOption.Arrival, OnError);
+            _StateManager.RegisterEndpointAction(ActivityStateOption.Credentials.ToString(), EndpointOption.Arrival, OnToggleCredentials);
 
+            AddToggleCommands();
+        }
+
+        private ICommand _ToggleCredentialsCommand;
+        ICommand ToggleCredentialsCommand
+        {
+            get
+            {
+                if (_ToggleCredentialsCommand == null)
+                {
+                    _ToggleCredentialsCommand = new RelayCommand(
+                        param => ToggleCredentials(),
+                        param => CanToggle()
+                            );
+                }
+                return _ToggleCredentialsCommand;
+            }
+        }
+
+        private void ToggleCredentials()
+        {
+            StateManager manager = Application.Current.Properties[AppConstants.StateManager] as StateManager;
+            manager.Machine.ExecuteTransition(TransitionTypeOption.ToggleCredentials.ToString());
+        }
+
+        private bool CanToggle()
+        {
+            return true;// (_Workspace != null);
+        }
+
+        private void OnToggleCredentials()
+        {
+            LayoutRoot.Children.Clear();
+            LayoutRoot.Children.Add(Credentials);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -113,7 +154,12 @@ namespace Arges
         {
         }
 
-
+        private void AddToggleCommands()
+        {
+            KeyGesture toggleCredentials = new KeyGesture(Key.U, ModifierKeys.Control);
+            KeyBinding toggleCredentialsBinding = new KeyBinding(ToggleCredentialsCommand, toggleCredentials);
+            this.InputBindings.Add(toggleCredentialsBinding);
+        }
 
     }
 }

@@ -7,8 +7,11 @@
 
 }
 
+
+
 <table class="table">
     <tr>
+        <th></th>
         <th>
 
         </th>
@@ -29,7 +32,19 @@
 
 @foreach (var item in list) {
     <tr>
+        <td>
+        @if (item.IsImage)
+        {
+            <a href="/docview/image?id=@item.ArtifactId" target="_blank"><span class="glyphicon glyphicon-search"></span></a>
 
+        }
+        else if (item.IsText)
+        {
+            <a href="/docview/text?id=@item.ArtifactId" target="_blank"><span class="glyphicon glyphicon-search"></span></a>
+
+        }
+
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ArtifactType)
         </td>
@@ -44,9 +59,10 @@
             @Html.DisplayFor(modelItem => item.UploadedOn)
         </td>
         <td>
-            @Html.ActionLink("download","download",new { id = @item.DocumentId}))
+            @Html.ActionLink("download","download",new { id = @item.DocumentId})
         </td>
     </tr>
 }
 
 </table>
+

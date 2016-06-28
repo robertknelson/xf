@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controller\AppsController.cs" />
+    <Compile Include="controller\DocumentsController.cs" />
+    <Compile Include="controller\DocViewController.cs" />
     <Compile Include="controller\FavoritesController.cs" />
     <Compile Include="controller\FileDropController.cs" />
     <Compile Include="controller\FileUploadController.cs" />

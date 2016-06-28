@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Arges
@@ -13,15 +9,19 @@ namespace Arges
     public class WindowsServer
     {
         [DataMember]
+        [XmlAttribute("id")]
+        public int ServerId { get; set; }
+
+        [IgnoreDataMember]
+        [XmlAttribute("grp")]
+        public string GroupName { get; set; }
+
+        [IgnoreDataMember]
+        [XmlIgnore]
+        public string Master { get; set; }
+
         [XmlAttribute("ip")]
         public string ExternalIP { get; set; }
-
-        [IgnoreDataMember]
-        [XmlIgnore]
-        public string Token { get; set; }
-
-        [IgnoreDataMember]
-        [XmlIgnore]
-        public string Name { get; set; }
+        
     }
 }

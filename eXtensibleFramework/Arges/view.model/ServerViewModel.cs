@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using XF.Windows.Common;
 
@@ -10,8 +6,85 @@ namespace Arges
 {
     public class ServerViewModel : ViewModel<Cyclops.Server>
     {
+        #region operational properties
+
+        #region Master (string)
+
+        private string _Master;
+
+        /// <summary>
+        /// Gets or sets the string value for Master
+        /// </summary>
+        /// <value> The string value.</value>
+
+        public string Master
+        {
+            get { return (String.IsNullOrEmpty(_Master)) ? String.Empty : _Master; }
+            set
+            {
+                if (_Master != value)
+                {
+                    _Master = value;
+                    OnPropertyChanged("Master");
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region Label (string)
+
+        private string _Label;
+
+        /// <summary>
+        /// Gets or sets the string value for Label
+        /// </summary>
+        /// <value> The string value.</value>
+
+        public string Label
+        {
+            get { return (String.IsNullOrEmpty(_Label)) ? String.Empty : _Label; }
+            set
+            {
+                if (_Label != value)
+                {
+                    _Label = value;
+                    OnPropertyChanged("Label");
+                }
+            }
+        }
+
+        #endregion
+
+        #endregion
+
 
         #region properties
+
+        #region IsSelected (bool)
+
+        private bool _IsSelected;
+
+        /// <summary>
+        /// Gets or sets the bool value for IsSelected
+        /// </summary>
+        /// <value> The bool value.</value>
+
+        public bool IsSelected
+        {
+            get { return _IsSelected; }
+            set
+            {
+                if (_IsSelected != value)
+                {
+                    _IsSelected = value;
+                    OnPropertyChanged("IsSelected");
+                }
+            }
+        }
+
+        #endregion
 
         #region ServerId (int)
 
@@ -159,7 +232,8 @@ namespace Arges
 
         private void ExecuteRdp()
         {
-            var credentials = CredentialsManager.ResolveCredentials(ExternalIP);
+            //var credentials = CredentialsManager.ResolveCredentials(ExternalIP);
+            var credentials = CredentialsManager.ResolveCredentials(ServerId);
             if (credentials != null)
             {
                 string s = credentials.ToString();

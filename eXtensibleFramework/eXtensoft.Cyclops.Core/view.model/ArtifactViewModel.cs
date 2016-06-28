@@ -10,6 +10,21 @@ namespace Cyclops.Web
 {
     public class ArtifactViewModel : ViewModel<Artifact>
     {
+        private Dictionary<string, bool> _ImageMimes = new Dictionary<string, bool>( StringComparer.OrdinalIgnoreCase)
+        {
+            {"image/png",true },
+            {"image/jpeg",true },
+            {"image/tif",true },
+        };
+
+        private Dictionary<string, bool> _TextMimes = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase)
+        {
+            {"text/plain",true },
+            {"application/xaml+xml",true },
+            {"text/html",true },
+            {"application/xml" ,true},
+        };
+
         public int ArtifactId { get; set; }
 
         public int ArtifactTypeId { get; set; }
@@ -50,6 +65,26 @@ namespace Cyclops.Web
 
         public string RedirectController { get; set; }
 
+        public string Text { get; set; }
+
+        public bool IsText
+        {
+            get { return String.IsNullOrWhiteSpace(Mime) ? false : _TextMimes.ContainsKey(Mime);}
+        }
+
+        public bool IsImage
+        {
+            get { return String.IsNullOrWhiteSpace(Mime) ? false : _ImageMimes.ContainsKey(Mime); }
+        }
+
+        public string RelativePath
+        {
+            get
+            {
+                return GetRelativePath();
+            }
+        }
+
         public ArtifactViewModel() { }
 
         public ArtifactViewModel(Artifact model)
@@ -70,7 +105,20 @@ namespace Cyclops.Web
             UploadedOn = model.Tds.ToShortDateString();
         }
 
+        private string GetRelativePath()
+        {
+            string path = string.Empty;
+            if (!String.IsNullOrWhiteSpace(Location))
+            {
+                int index = Location.IndexOf("app_files");
+                if (index > 0)
+                {
+                    path = Location.Substring(index);
 
+                }
+            }
+            return path;
+        }
         public override bool IsValid()
         {
             return true;

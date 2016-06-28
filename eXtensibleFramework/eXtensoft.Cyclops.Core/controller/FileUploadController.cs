@@ -127,23 +127,32 @@ namespace Cyclops.Controllers
         [HttpGet]
         public FileResult Download(int id)
         {
-
+            FileResult result = null;
             if (id > 0)
             {
                 var c = Criterion.GenerateStrategy("by.documentid");
-                var criterion = new Criterion("DocumentId", id);
-                var response = Service.Get<Artifact>(criterion);
+                c.AddItem("DocumentId", id);
+                //var criterion = new Criterion("DocumentId", id);
+                var response = Service.Get<Artifact>(c);
                 if (!response.IsOkay)
                 {
-
+                    result = File("", System.Net.Mime.MediaTypeNames.Application.Octet);
                 }
                 else
                 {
-
+                    if (System.IO.File.Exists(response.Model.Location))
+                    {
+                        result = File(response.Model.Location, response.Model.Mime, response.Model.OriginalFilename);
+                    }
+                    else
+                    {
+                        result = null;
+                    }
                 }
+               
             }
 
-            return File("", System.Net.Mime.MediaTypeNames.Application.Octet);
+            return result;
         }
 
 

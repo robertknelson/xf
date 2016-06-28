@@ -2,17 +2,29 @@
 
 @{
     ViewBag.Title = "Index";
+    bool isDirty = (bool)ViewBag.IsDirty;
 
     int max = 0;
-
-
 }
 
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+
+@{
+    if (isDirty)
+    {
+        using (Html.BeginForm("Save", "ApiEndpoints"))
+        {
+            <input type="submit" value="Save" class="btn btn-default" />
+        }
+    }
+}
+
 </p>
+@if (!String.IsNullOrWhiteSpace(ViewBag.Message))
+{
+    <p>ViewBag.Message</p>
+}
+
 <table class="table">
     <tr>
         <th>

@@ -11,6 +11,7 @@ namespace XF.Windows.Common
         UnAuthorize,
         Logoff,
         OnError,
-        ToggleSettings
+        ToggleSettings,
+        ToggleCredentials,
     }
 }

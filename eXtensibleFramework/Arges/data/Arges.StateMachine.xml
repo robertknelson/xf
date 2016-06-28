@@ -5,6 +5,7 @@
   <State name="Authorized" display="Authorized" />
   <State name="Unauthorized" display="Unauthorized" />
   <State name="Error" display="Error" />
+  <State name="Credentials" display="Credentials"/>
   <Transition name="Login" display="" origin="LoggedOff" destination="Authenticated" order="0" />
   <Transition name="UnAuthorize" display="" origin="Authenticated" destination="Unauthorized" order="0" />
   <Transition name="Authorize" display="" origin="Authenticated" destination="Authorized" order="0" />
@@ -14,4 +15,6 @@
   <Transition name="OnError" display="" origin="Authenticated" destination="Error" order="0" />
   <Transition name="OnError" display="" origin="Authorized" destination="Error" order="0" />
   <Transition name="Logoff" display="" origin="Error" destination="LoggedOff" order="0" />
+  <Transition name="ToggleCredentials" display="" origin="Authorized" destination="Credentials" order="0" />
+  <Transition name="ToggleCredentials" display="" origin="Credentials" destination="Authorized" order="0" />
 </StateMachine>

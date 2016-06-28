@@ -63,10 +63,28 @@
     <Compile Include="code\AppConstants.cs" />
     <Compile Include="code\CredentialsManager.cs" />
     <Compile Include="code\ListItem.cs" />
+    <Compile Include="code\MasterViewConverter.cs" />
     <Compile Include="code\MasterViewOption.cs" />
     <Compile Include="code\EnumTemplateSelector.cs" />
+    <Compile Include="code\MasterViewSelector.cs" />
     <Compile Include="code\RemoteDesktop.cs" />
     <Compile Include="code\SelectionConverter.cs" />
+    <Compile Include="model\credentials\BranchNode.cs" />
+    <Compile Include="model\credentials\LeafNode.cs" />
+    <Compile Include="model\credentials\Node.cs" />
+    <Compile Include="model\credentials\NodeTypeOption.cs" />
+    <Compile Include="UserCredentialView.xaml.cs">
+      <DependentUpon>UserCredentialView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\UserCredentialsView.xaml.cs">
+      <DependentUpon>UserCredentialsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\GroupedMasterView.xaml.cs">
+      <DependentUpon>GroupedMasterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\HierarchicalMasterView.xaml.cs">
+      <DependentUpon>HierarchicalMasterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MasterView.xaml.cs">
       <DependentUpon>MasterView.xaml</DependentUpon>
     </Compile>
@@ -80,9 +98,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ServerCredentialsViewModel.cs" />
+    <Compile Include="view.model\ServerCredentialsViewModel.cs" />
     <Compile Include="ServerView.xaml.cs">
       <DependentUpon>ServerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\SimpleMasterView.xaml.cs">
+      <DependentUpon>SimpleMasterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="view.model\SelectionViewModel.cs" />
     <Compile Include="view.model\ServerGroupingViewModel.cs" />
@@ -111,7 +132,7 @@
     <Compile Include="view\state.management\UnauthorizedView.xaml.cs">
       <DependentUpon>UnauthorizedView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowsServerViewModel.cs" />
+    <Compile Include="view.model\WindowsServerViewModel.cs" />
     <Compile Include="WorkspaceView.xaml.cs">
       <DependentUpon>WorkspaceView.xaml</DependentUpon>
     </Compile>
@@ -182,11 +203,35 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="theme\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserCredentialView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\UserCredentialsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\GroupedMasterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\HierarchicalMasterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MasterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ServerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\SimpleMasterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

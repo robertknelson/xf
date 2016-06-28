@@ -1,10 +1,22 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:xux="clr-namespace:XF.Windows.Common;assembly=XF.Windows"
-                    xmlns:local="clr-namespace:Arges">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:local="clr-namespace:Arges"
+                    xmlns:xux="clr-namespace:XF.Windows.Common;assembly=XF.Windows" >
 
 
 
+
+    <DataTemplate x:Key="SimpleMasterDataTemplate">
+        <local:SimpleMasterView/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="GroupedMasterDataTemplate">
+        <local:GroupedMasterView/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="HierarchicalMasterDataTemplate">
+        <local:HierarchicalMasterView/>
+    </DataTemplate>
 
 
 
@@ -26,8 +38,29 @@
             <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
         </StackPanel>
     </HierarchicalDataTemplate>
+    <!--
+    <DataTemplate DataType="{x:Type local:ServerViewModel}">
+        <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+    </DataTemplate>
+-->
+    <DataTemplate DataType="{x:Type local:ServerCredentialsViewModel}">
+        <StackPanel Orientation="Horizontal">
+            <TextBox Text="{Binding Path=Domain}"/>
+            <TextBox Text="{Binding Path=Username}"/>
+        </StackPanel>
+    </DataTemplate>
 
-
-
-
+<Style TargetType="{x:Type TreeViewItem}">
+    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Style.Triggers>
+        <Trigger Property="IsSelected" Value="True">
+                <Setter Property="FontWeight" Value="Bold" />
+        </Trigger>
+    </Style.Triggers>
+</Style>
+    
+    
+    
 </ResourceDictionary>

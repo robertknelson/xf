@@ -8,7 +8,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <xux:MappedTemplateSelector x:Key="MappedSelector"/>
-        
+        <local:MasterViewConverter x:Key="mvConverter"/>
+        <local:MasterViewSelector x:Key="MasterSelector"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,14 +21,20 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0" Background="Orange" MinHeight="40"/>
-        <ContentControl Grid.Column="0" Grid.Row="1">
+        <Grid Grid.Column="0" Grid.Row="0" Background="Orange" MinHeight="40">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Content="Simple" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=IsSimple}"/>
+                <RadioButton Content="Grouped" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=IsGrouped}"/>
+                <RadioButton Content="Treeview" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=IsHierarchical}" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="1" x:Name="grdMaster">
             
-        </ContentControl>
+        </Grid>
      
         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"></GridSplitter>
         <Grid x:Name="dgrItems" Margin="20"
-              DataContext="{Binding ElementName=trvItems, Path=SelectedItem}"
+              DataContext="{Binding Path=SelectedItem}"
                   Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Background="PaleGoldenrod" >
             <ContentControl Margin="5" 
                             Content="{Binding}" 
