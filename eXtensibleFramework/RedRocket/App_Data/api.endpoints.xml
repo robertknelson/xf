@@ -10,12 +10,12 @@
   <Pattern>v{version}/contacts</Pattern>
   <Description>This endpoint provides REST API functionality for Contacts</Description>
  </Endpoint>
- <Endpoint sortOrder="3" version="1" id="cad93d07-16df-4465-a800-5ff8c3471e5f" name="Company ToDo Endpoint">
+ <Endpoint sortOrder="4" version="1" id="cad93d07-16df-4465-a800-5ff8c3471e5f" name="Company ToDo Endpoint">
   <Whitelist />
   <Pattern>v{version}/todos</Pattern>
   <Description>This endpoint provides REST API functionality for ToDo items</Description>
  </Endpoint>
- <Endpoint sortOrder="4" version="1" id="2c526773-a6fa-4199-be1f-8c775beb98ad" name="Conflict Endpoint">
+ <Endpoint sortOrder="3" version="1" id="2c526773-a6fa-4199-be1f-8c775beb98ad" name="Conflict Endpoint">
   <Whitelist />
   <Pattern>v{version}/todos</Pattern>
   <Description>This endpoint provides REST API functionality for Something</Description>

@@ -96,6 +96,8 @@
     <Compile Include="contracts\IDataService.cs" />
     <Compile Include="contracts\IEventService.cs" />
     <Compile Include="contracts\IEventWriter.cs" />
+    <Compile Include="contracts\IeXtensibleVisitor.cs" />
+    <Compile Include="contracts\IeXtensibleVisitor`1.cs" />
     <Compile Include="contracts\IMessage`1.cs" />
     <Compile Include="contracts\IModelRequestService.cs" />
     <Compile Include="contracts\IModelService.cs" />

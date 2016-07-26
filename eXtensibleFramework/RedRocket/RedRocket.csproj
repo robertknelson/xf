@@ -253,6 +253,10 @@
       <Project>{e1034cc1-2ae6-4fb1-8c3e-ebff8085005c}</Project>
       <Name>Company.Technology.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Company.Api\Company.Api.csproj">
+      <Project>{9c5a3a8d-82ed-4dbf-975c-934f6cdb5425}</Project>
+      <Name>Company.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XF.Common.Contracts\XF.Common.Contracts.csproj">
       <Project>{2f5cb864-edc3-41c2-a477-a6dbbdb62487}</Project>
       <Name>XF.Common.Contracts</Name>

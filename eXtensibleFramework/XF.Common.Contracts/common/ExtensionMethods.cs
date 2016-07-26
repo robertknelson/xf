@@ -307,27 +307,14 @@ namespace XF.Common
             list = swap;
         }
 
-        public static Type GetItemType(this ICriterion criteria, string key)
+        public static void Accept(this IEnumerable<TypedItem> items, IeXtensibleVisitor visitor)
         {
-            Type t = null;
-            if (criteria.Items != null)
-            {
-                foreach (var item in criteria.Items)
-                {
-                    if (item.Key.Equals(key, StringComparison.OrdinalIgnoreCase))
-                    {
-                        t = item.Value.GetType();
-                        break;
-                    }
-                }
-            }
-            return t;
+            visitor.Visit(items);
         }
-
-        public static bool IsSerializable(this Type type)
+        public static void Accept<T>(this IEnumerable<TypedItem> items, T t, IeXtensibleVisitor<T> visitor) where T : class, new()
         {
-            var result = type.GetCustomAttributes(typeof(SerializableAttribute), false);
-            return (result != null && result.Length > 0);
+            visitor.Visit(items);
+            visitor.Visit(t);
         }
 
         public static void SetStrategyKeyValue(this ICriterion item, string strategyKey, string strategyValue)
